@@ -1,0 +1,103 @@
+.food-details-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+.food-details-modal {
+  background: #181818;
+  border: 2px solid #636B2F;
+  border-radius: 18px;
+  padding: 32px 24px 24px 24px;
+  min-width: 320px;
+  max-width: 90vw;
+  max-height: 80vh;
+  color: #636B2F;
+  box-shadow: 0 8px 32px rgba(99,107,47,0.18);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  animation: modalIn 0.25s cubic-bezier(.4,2,.6,1) both;
+}
+@keyframes modalIn {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.food-details-close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: #636B2F;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1;
+}
+.food-details-image {
+  width: 220px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  border: 2px solid #636B2F;
+}
+.food-details-desc {
+  margin: 12px 0 18px 0;
+  color: #8ca04a;
+  text-align: center;
+}
+.food-details-bottom {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 10px;
+}
+.food-details-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #636B2F;
+}
+.food-details-add-btn {
+  background: #636B2F;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.food-details-add-btn:hover {
+  background: #8ca04a;
+  color: #000;
+}
+@media (max-width: 600px) {
+  .food-details-modal {
+    min-width: 98vw;
+    max-width: 98vw;
+    padding: 8px 2px 8px 2px;
+    border-radius: 10px;
+  }
+  .food-details-image {
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+    max-height: 220px;
+    object-fit: contain;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 12px;
+  }
+} 

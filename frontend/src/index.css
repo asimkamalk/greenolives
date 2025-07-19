@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --primary-olive: #636B2F;
+  --primary-olive-dark: #4e561f;
+  --primary-olive-light: #8ca04a;
+  --accent: #fffbe6;
+  --background: #000;
+  --card-bg: #181818;
+  --font-main: 'Poppins', 'Roboto', 'Open Sans', Arial, sans-serif;
+  --shadow: 0 2px 16px rgba(99,107,47,0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-main);
+  background: #000;
+  color: #636B2F;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.app {
+  width: 80%;
+  margin: auto;
+}
+
+@media (max-width:1050px) {
+  .app {
+    width: 90%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-main);
+  font-weight: 700;
+  color: #636B2F;
+  margin-top: 0;
+}
+
+button, .btn {
+  background: #636B2F;
+  color: #000;
+  border: 1px solid #636B2F;
+  border-radius: 8px;
+  padding: 0.7em 1.6em;
+  font-size: 1.08rem;
+  font-family: var(--font-main);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+button:hover, .btn:hover {
+  background: #8ca04a;
+  color: #000;
+  box-shadow: 0 4px 24px rgba(99,107,47,0.13);
+}
+
+input, textarea, select {
+  font-family: var(--font-main);
+  border-radius: 6px;
+  border: 1px solid #636B2F;
+  padding: 0.6em;
+  font-size: 1rem;
+  background: #181818;
+  color: #636B2F;
+  transition: border 0.2s;
+}
+input:focus, textarea:focus, select:focus {
+  border: 1.5px solid #636B2F;
+  outline: none;
+}
+
+.card, .menu-card {
+  background: #181818;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1.2em;
+  margin: 1em 0;
+  color: #636B2F;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover, .menu-card:hover {
+  box-shadow: 0 6px 32px rgba(99,107,47,0.15);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.badge, .category-badge {
+  background: #232323;
+  color: #636B2F;
+  border: 1px solid #636B2F;
+  border-radius: 12px;
+  padding: 0.2em 0.9em;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  display: inline-block;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: #232323;
+}
+::-webkit-scrollbar-thumb {
+  background: #636B2F;
+  border-radius: 4px;
+}

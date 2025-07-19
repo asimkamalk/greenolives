@@ -1,0 +1,42 @@
+.dynamic-bucket {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 9999;
+  background: #181818;
+  border: 2px solid #636B2F;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(99,107,47,0.18);
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.dynamic-bucket:hover {
+  background: #232323;
+  box-shadow: 0 8px 32px rgba(99,107,47,0.25);
+}
+.dynamic-bucket img {
+  width: 36px;
+  height: 36px;
+}
+.dynamic-bucket-count {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #636B2F;
+  color: #000;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border: 2px solid #181818;
+  box-shadow: 0 2px 8px rgba(99,107,47,0.15);
+} 

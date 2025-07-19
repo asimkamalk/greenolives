@@ -1,0 +1,59 @@
+import React from 'react'
+import Navbar from './components/Navbar/Navbar'
+import Sidebar from './components/Sidebar/Sidebar'
+import { Route, Routes, Navigate } from 'react-router-dom'
+import Add from './pages/Add/Add'
+import List from './pages/List/List'
+import Orders from './pages/Orders/Orders'
+import Login from './pages/Login/Login'
+import Sales from './pages/Sales/Sales'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('adminToken');
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
+
+const App = () => {
+  const token = localStorage.getItem('adminToken');
+
+  return (
+    <div className='app'>
+      <ToastContainer />
+      {token && <Navbar />}
+      {token && <hr />}
+      <div className="app-content">
+        {token && <Sidebar />}
+        <Routes>
+          <Route path="/" element={token ? <Navigate to="/list" replace /> : <Login />} />
+          <Route path="/add" element={
+            <ProtectedRoute>
+              <Add />
+            </ProtectedRoute>
+          } />
+          <Route path="/list" element={
+            <ProtectedRoute>
+              <List />
+            </ProtectedRoute>
+          } />
+          <Route path="/orders" element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          } />
+          <Route path="/sales" element={
+            <ProtectedRoute>
+              <Sales />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </div>
+    </div>
+  )
+}
+
+export default App

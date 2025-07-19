@@ -1,0 +1,131 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 420px;
+    padding: 48px 0;
+    margin: 30px auto;
+    background: url('/olive_hero.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(99,107,47,0.10);
+}
+.header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(99,107,47,0.72) 60%, rgba(255,76,36,0.18) 100%);
+    z-index: 1;
+}
+.header-contents {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2vw;
+    max-width: 45%;
+    margin-left: 4vw;
+    z-index: 2;
+    animation: fadeIn 2s;
+    padding: 2vw 2vw 2vw 0;
+    left: 0;
+    bottom: 0;
+}
+.header-contents h2{
+    font-weight: 700;
+    color: #fff;
+    font-size: max(5vw, 32px);
+    line-height: 1.1;
+    margin-bottom: 0.5vw;
+}
+.header-contents h2 .highlight {
+    color: #FF4C24;
+    background: linear-gradient(90deg, #FF4C24 60%, #ff7e5f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.header-contents p{
+    color: #fffbe6;
+    font-size: max(1.1vw, 15px);
+    font-weight: 400;
+    margin-bottom: 1vw;
+    text-shadow: 0 2px 8px rgba(99,107,47,0.18);
+}
+.header-contents button{
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 1.2vw 2.8vw;
+    background: linear-gradient(90deg, #FF4C24 60%, #ff7e5f 100%);
+    font-size: max(1.2vw, 16px);
+    border-radius: 50px;
+    box-shadow: 0 4px 16px rgba(255,76,36,0.13);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+    margin-top: 0.5vw;
+    letter-spacing: 0.01em;
+}
+.header-contents button:hover, .header-contents button:focus {
+    background: linear-gradient(90deg, #ff7e5f 60%, #FF4C24 100%);
+    color: #fffbe6;
+    box-shadow: 0 8px 32px rgba(255,76,36,0.18);
+    outline: none;
+}
+@media (max-width: 1050px) {
+    .header {
+        min-height: unset;
+        height: 38vw;
+        padding: 0;
+    }
+    .header-contents {
+        max-width: 60%;
+        left: 4vw;
+        bottom: 10%;
+        position: absolute;
+    }
+}
+@media (max-width: 750px) {
+    .header {
+        min-height: 320px;
+        height: 60vw;
+        border-radius: 18px;
+        padding: 0;
+        background-size: cover;
+        background-position: center;
+    }
+    .header::before {
+        background: linear-gradient(120deg, rgba(0,0,0,0.72) 70%, rgba(99,107,47,0.5) 100%);
+    }
+    .header-contents {
+        max-width: 98vw;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: 0;
+        gap: 3vw;
+        padding: 6vw 4vw 6vw 4vw;
+        position: absolute;
+        align-items: flex-start;
+        background: rgba(0,0,0,0.45);
+        border-radius: 0 0 18px 18px;
+    }
+    .header-contents h2 {
+        font-size: max(7vw, 22px);
+        color: #fff;
+        margin-bottom: 2vw;
+    }
+    .header-contents p {
+        font-size: max(3vw, 14px);
+        margin-bottom: 2vw;
+        color: #fffbe6;
+        display: block;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .header-contents button {
+        padding: 3vw 7vw;
+        font-size: max(3vw, 15px);
+    }
+}
