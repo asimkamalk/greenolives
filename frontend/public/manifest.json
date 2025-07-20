@@ -1,0 +1,21 @@
+{
+  "name": "Green Olives",
+  "short_name": "GreenOlives",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#181818",
+  "theme_color": "#FF4C24",
+  "description": "Order your favorite food from Green Olives!",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+} 

@@ -5,6 +5,7 @@ import { assets } from '../../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 const PlaceOrder = () => {
     console.log("PlaceOrder component is mounting...");
@@ -20,8 +21,13 @@ const PlaceOrder = () => {
     })
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState("");
+    const [isOpen, setIsOpen] = useState(true);
+    const [hoursLoaded, setHoursLoaded] = useState(false);
+    const [paymentScreenshot, setPaymentScreenshot] = useState(null);
+    const [transactionId, setTransactionId] = useState("");
+    const [verifying, setVerifying] = useState(false);
 
-    const { getTotalCartAmount, token, food_list, cartItems, url, setCartItems,currency,deliveryCharge, fetchUserData } = useContext(StoreContext);
+    const { getTotalCartAmount, token, food_list, cartItems, url, setCartItems,currency,deliveryCharge, fetchUserData, restaurantHours, fetchRestaurantHours } = useContext(StoreContext);
 
     const navigate = useNavigate();
 
@@ -32,7 +38,7 @@ const PlaceOrder = () => {
     }
 
     const placeOrder = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         let orderItems = [];
         food_list.map(((item) => {
             if (cartItems[item._id] > 0) {
@@ -41,34 +47,31 @@ const PlaceOrder = () => {
                 orderItems.push(itemInfo)
             }
         }))
-        let orderData = {
-            address: data,
-            items: orderItems,
-            amount: getTotalCartAmount() + deliveryCharge,
-            userId: userId,
+        let formData = new FormData();
+        formData.append('address', JSON.stringify(data));
+        formData.append('items', JSON.stringify(orderItems));
+        formData.append('amount', getTotalCartAmount() + deliveryCharge);
+        formData.append('userId', userId);
+        formData.append('paymentMethod', payment);
+        if (payment !== 'cod') {
+            formData.append('transactionId', transactionId);
+            if (paymentScreenshot) formData.append('paymentScreenshot', paymentScreenshot);
         }
-        if (payment === "stripe") {
-            let response = await axios.post(url + "/api/order/place", orderData, { headers: { token } });
-            if (response.data.success) {
-                const { session_url } = response.data;
-                window.location.replace(session_url);
+        setVerifying(payment !== 'cod');
+        let response = await axios.post(url + "/api/order/place", formData, { headers: { token },
+            ...(paymentScreenshot && { 'Content-Type': 'multipart/form-data' }) });
+        if (response.data.success) {
+            setCartItems({});
+            if (payment === 'cod') {
+                navigate("/myorders");
+                toast.success(response.data.message);
+            } else {
+                toast.info("Verifying, please wait...");
+                navigate("/myorders");
             }
-            else {
-                toast.error("Something Went Wrong")
-            }
+        } else {
+            toast.error("Something Went Wrong");
         }
-        else{
-            let response = await axios.post(url + "/api/order/placecod", orderData, { headers: { token } });
-            if (response.data.success) {
-                navigate("/myorders")
-                toast.success(response.data.message)
-                setCartItems({});
-            }
-            else {
-                toast.error("Something Went Wrong")
-            }
-        }
-
     }
 
     useEffect(() => {
@@ -107,9 +110,47 @@ const PlaceOrder = () => {
         }
     }, [token])
 
-    if (loading) return <div style={{textAlign:'center',marginTop:40}}><span>Loading...</span></div>;
+    useEffect(() => {
+        async function checkOpenStatus() {
+            let hours = restaurantHours;
+            if (!hours) {
+                hours = await fetchRestaurantHours();
+            }
+            if (hours) {
+                const now = moment().tz(hours.timezone || 'Asia/Karachi');
+                const opening = moment.tz(hours.openingHour, 'HH:mm', hours.timezone || 'Asia/Karachi');
+                let closing = moment.tz(hours.closingHour, 'HH:mm', hours.timezone || 'Asia/Karachi');
+                if (closing.isSameOrBefore(opening)) {
+                    closing.add(1, 'day');
+                }
+                if (now.isBefore(opening) || now.isAfter(closing)) {
+                    setIsOpen(false);
+                } else {
+                    setIsOpen(true);
+                }
+                setHoursLoaded(true);
+            } else {
+                setIsOpen(true);
+                setHoursLoaded(true);
+            }
+        }
+        checkOpenStatus();
+    }, [restaurantHours]);
+
+    if (loading || !hoursLoaded) return <div style={{textAlign:'center',marginTop:40}}><span>Loading...</span></div>;
 
     return (
+        <>
+        {!isOpen && (
+            <div style={{color:'red',textAlign:'center',marginBottom:24,fontWeight:600,fontSize:18}}>
+                We are currently closed. Please come back at {restaurantHours ? moment(restaurantHours.openingHour, 'HH:mm').format('h:mma') : '10:00am'}!
+            </div>
+        )}
+        {verifying && (
+            <div style={{color:'#FF4C24',textAlign:'center',marginTop:24,fontWeight:600,fontSize:18}}>
+                Verifying, please wait...
+            </div>
+        )}
         <form onSubmit={placeOrder} className='place-order'>
             <div className="place-order-left">
                 <p className='title'>Delivery Information</p>
@@ -139,14 +180,35 @@ const PlaceOrder = () => {
                         <img src={payment === "cod" ? assets.checked : assets.un_checked} alt="" />
                         <p>COD ( Cash on delivery )</p>
                     </div>
-                    <div onClick={() => setPayment("stripe")} className="payment-option">
-                        <img src={payment === "stripe" ? assets.checked : assets.un_checked} alt="" />
-                        <p>Stripe ( Credit / Debit )</p>
+                    <div onClick={() => setPayment("easypaisa")} className="payment-option">
+                        <img src={payment === "easypaisa" ? assets.checked : assets.un_checked} alt="" />
+                        <p>EasyPaisa (Online Transfer)</p>
                     </div>
+                    <div onClick={() => setPayment("jazzcash")} className="payment-option">
+                        <img src={payment === "jazzcash" ? assets.checked : assets.un_checked} alt="" />
+                        <p>JazzCash (Online Transfer)</p>
+                    </div>
+                    <div onClick={() => setPayment("bank")} className="payment-option">
+                        <img src={payment === "bank" ? assets.checked : assets.un_checked} alt="" />
+                        <p>Bank Transfer</p>
+                    </div>
+                    {payment !== 'cod' && (
+                        <div style={{marginTop:16, background:'#181818', padding:16, borderRadius:8}}>
+                            <p style={{marginBottom:8}}><b>Instructions:</b> Please transfer the total amount to the following account and upload a screenshot of your payment. Enter your transaction ID as well.</p>
+                            <ul style={{marginBottom:8}}>
+                                {payment === 'easypaisa' && <li>EasyPaisa Number: <b>03xx-xxxxxxx</b></li>}
+                                {payment === 'jazzcash' && <li>JazzCash Number: <b>03xx-xxxxxxx</b></li>}
+                                {payment === 'bank' && <li>Bank Account: <b>1234567890 (Bank Name)</b></li>}
+                            </ul>
+                            <input type="text" placeholder="Transaction ID" value={transactionId} onChange={e => setTransactionId(e.target.value)} style={{marginBottom:8, width:'100%', padding:8}} required />
+                            <input type="file" accept="image/*" onChange={e => setPaymentScreenshot(e.target.files[0])} required />
+                        </div>
+                    )}
                 </div>
-                <button className='place-order-submit' type='submit'>{payment==="cod"?"Place Order":"Proceed To Payment"}</button>
+                <button className='place-order-submit' type='submit' disabled={!isOpen || verifying}>{payment==="cod"?"Place Order":"Place Order & Upload Payment"}</button>
             </div>
         </form>
+        </>
     )
 }
 

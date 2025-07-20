@@ -6,7 +6,19 @@ import { motion } from 'framer-motion';
 
 const FoodItem = ({ image, name, price, desc, id, onCardClick }) => {
   const [itemCount, setItemCount] = useState(0);
-  const { cartItems, addToCart, removeFromCart, url, currency } = useContext(StoreContext);
+  const { cartItems, addToCart, removeFromCart, url, currency, token, favorites, addFavorite, removeFavorite } = useContext(StoreContext);
+
+  const isFavorite = favorites && favorites.includes(id);
+
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation();
+    if (!token) return; // Optionally prompt login
+    if (isFavorite) {
+      removeFavorite(id);
+    } else {
+      addFavorite(id);
+    }
+  };
 
   return (
     <motion.div
@@ -30,9 +42,20 @@ const FoodItem = ({ image, name, price, desc, id, onCardClick }) => {
         )}
       </div>
       <div className="food-item-info">
-        <div className="food-item-name-rating">
+        <div className="food-item-name-rating" style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
           <p>{name}</p>
-          <img src={assets.rating_starts} alt="Rating" />
+          <span
+            style={{
+              cursor: 'pointer',
+              fontSize: 22,
+              color: isFavorite ? 'red' : '#bbb',
+              marginLeft: 8
+            }}
+            onClick={handleFavoriteClick}
+            title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            {isFavorite ? '❤️' : '🤍'}
+          </span>
         </div>
         <p className="food-item-desc">{desc}</p>
         <p className="food-item-price">{currency}{price}</p>

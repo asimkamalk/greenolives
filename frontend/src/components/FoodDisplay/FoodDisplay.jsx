@@ -14,7 +14,11 @@ const FoodDisplay = ({ category, customList }) => {
     setModalOpen(true);
   };
 
-  const displayList = customList || food_list;
+  const displayList = customList || (
+    category === "All"
+      ? food_list
+      : food_list.filter(item => item.category === category)
+  );
   return (
     <div className='food-display' id='food-display'>
       <h2>{category === undefined ? null : (category === "All" ? "All Recent Menu" : `${category} Menu`)}</h2>

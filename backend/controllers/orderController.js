@@ -2,6 +2,8 @@ import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js"
 import Stripe from "stripe";
 import mongoose from "mongoose";
+import settingsModel from "../models/settingsModel.js";
+import moment from "moment-timezone";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //config variables
@@ -9,50 +11,56 @@ const currency = "RS";
 const deliveryCharge = 5;
 const frontend_URL = 'http://localhost:5173';
 
-// Placing User Order for Frontend using stripe
-const placeOrder = async (req, res) => {
+// Helper to check if current time is within open hours
+async function isWithinOpenHours() {
+    let settings = await settingsModel.findOne();
+    if (!settings) {
+        // Default hours if not set
+        settings = { openingHour: "10:00", closingHour: "00:00", timezone: "Asia/Karachi" };
+    }
+    const now = moment().tz(settings.timezone || "Asia/Karachi");
+    const opening = moment.tz(settings.openingHour, "HH:mm", settings.timezone || "Asia/Karachi");
+    let closing = moment.tz(settings.closingHour, "HH:mm", settings.timezone || "Asia/Karachi");
+    // Handle midnight wrap (e.g., 10:00 to 00:00 means 10am to midnight)
+    if (closing.isSameOrBefore(opening)) {
+        closing.add(1, 'day');
+    }
+    // If now is before opening, or after closing, return false
+    if (now.isBefore(opening) || now.isAfter(closing)) {
+        return false;
+    }
+    return true;
+}
 
+// Placing User Order for Frontend (manual payment)
+const placeOrder = async (req, res) => {
     try {
+        if (!(await isWithinOpenHours())) {
+            return res.status(403).json({ success: false, message: "We are currently closed. Please come back at 10am!" });
+        }
+        let paymentScreenshot = req.file ? req.file.filename : undefined;
+        let address = req.body.address;
+        if (typeof address === 'string') {
+          try { address = JSON.parse(address); } catch (e) { address = {}; }
+        }
+        let items = req.body.items;
+        if (typeof items === 'string') {
+          try { items = JSON.parse(items); } catch (e) { items = []; }
+        }
         const newOrder = new orderModel({
             userId: req.body.userId,
-            items: req.body.items,
+            items: items,
             amount: req.body.amount,
-            address: req.body.address,
-        })
+            address: address,
+            paymentMethod: req.body.paymentMethod,
+            transactionId: req.body.transactionId,
+            paymentScreenshot,
+            paymentStatus: req.body.paymentMethod === 'cod' ? 'verified' : 'pending',
+            payment: req.body.paymentMethod === 'cod',
+        });
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
-
-        const line_items = req.body.items.map((item) => ({
-            price_data: {
-                currency: currency,
-                product_data: {
-                    name: item.name
-                },
-                unit_amount: item.price * 100 
-            },
-            quantity: item.quantity
-        }))
-
-        line_items.push({
-            price_data: {
-                currency: currency,
-                product_data: {
-                    name: "Delivery Charge"
-                },
-                unit_amount: deliveryCharge * 100
-            },
-            quantity: 1
-        })
-
-        const session = await stripe.checkout.sessions.create({
-            success_url: `${frontend_URL}/verify?success=true&orderId=${newOrder._id}`,
-            cancel_url: `${frontend_URL}/verify?success=false&orderId=${newOrder._id}`,
-            line_items: line_items,
-            mode: 'payment',
-        });
-
-        res.json({ success: true, session_url: session.url });
-
+        res.json({ success: true, message: "Order Placed", orderId: newOrder._id });
     } catch (error) {
         console.log(error);
         res.json({ success: false, message: "Error" })
@@ -63,6 +71,9 @@ const placeOrder = async (req, res) => {
 const placeOrderCod = async (req, res) => {
 
     try {
+        if (!(await isWithinOpenHours())) {
+            return res.status(403).json({ success: false, message: "We are currently closed. Please come back at 10am!" });
+        }
         const newOrder = new orderModel({
             userId: req.body.userId,
             items: req.body.items,
@@ -189,4 +200,15 @@ const getYearlySales = async (req, res) => {
     }
 };
 
-export { placeOrder, listOrders, userOrders, updateStatus, verifyOrder, placeOrderCod, deleteOrder, getDailySales, getMonthlySales, getYearlySales }
+// Admin: verify or reject payment
+const setPaymentStatus = async (req, res) => {
+    try {
+        const { orderId, status } = req.body; // status: 'verified' or 'not_verified'
+        await orderModel.findByIdAndUpdate(orderId, { paymentStatus: status });
+        res.json({ success: true, message: `Payment marked as ${status}` });
+    } catch (error) {
+        res.json({ success: false, message: "Error updating payment status" });
+    }
+};
+
+export { placeOrder, listOrders, userOrders, updateStatus, verifyOrder, placeOrderCod, deleteOrder, getDailySales, getMonthlySales, getYearlySales, setPaymentStatus }

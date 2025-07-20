@@ -6,6 +6,7 @@ import foodRouter from "./routes/foodRoute.js"
 import 'dotenv/config'
 import cartRouter from "./routes/cartRoute.js"
 import orderRouter from "./routes/orderRoute.js"
+import settingsRouter from "./routes/settingsRoute.js"
 
 // app config
 const app = express()
@@ -14,7 +15,10 @@ const port = process.env.PORT || 4001;
 
 // middlewares
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}))
 
 // db connection
 connectDB()
@@ -25,6 +29,7 @@ app.use("/api/food", foodRouter)
 app.use("/images",express.static('uploads'))
 app.use("/api/cart", cartRouter)
 app.use("/api/order",orderRouter)
+app.use("/api/settings", settingsRouter)
 
 app.get("/", (req, res) => {
     res.send("API Working")

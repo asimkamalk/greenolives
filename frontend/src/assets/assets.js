@@ -87,38 +87,36 @@ export const assets = {
 }
 
 export const menu_list = [
-    {
-        menu_name: "Salad",
-        menu_image: menu_1
-    },
-    {
-        menu_name: "Rolls",
-        menu_image: menu_2
-    },
-    {
-        menu_name: "Deserts",
-        menu_image: menu_3
-    },
-    {
-        menu_name: "Sandwich",
-        menu_image: menu_4
-    },
-    {
-        menu_name: "Cake",
-        menu_image: menu_5
-    },
-    {
-        menu_name: "Pure Veg",
-        menu_image: menu_6
-    },
-    {
-        menu_name: "Pasta",
-        menu_image: menu_7
-    },
-    {
-        menu_name: "Noodles",
-        menu_image: menu_8
-    }]
+    { menu_name: "Appetizer", menu_image: menu_1 },
+    { menu_name: "Kids Special", menu_image: menu_2 },
+    { menu_name: "Salad Zone", menu_image: menu_3 },
+    { menu_name: "Green's Classic", menu_image: menu_4 },
+    { menu_name: "Soup Corner", menu_image: menu_5 },
+    { menu_name: "Green's Special", menu_image: menu_6 },
+    { menu_name: "Tea Lover", menu_image: menu_7 },
+    { menu_name: "Sandwich", menu_image: menu_8 },
+    { menu_name: "Cold Coffee", menu_image: menu_1 },
+    { menu_name: "Burger Crowd", menu_image: menu_2 },
+    { menu_name: "Iced Coffee", menu_image: menu_3 },
+    { menu_name: "Panini Corner", menu_image: menu_4 },
+    { menu_name: "Special Drinks", menu_image: menu_5 },
+    { menu_name: "Colada's", menu_image: menu_6 },
+    { menu_name: "Pizza House", menu_image: menu_7 },
+    { menu_name: "Steak House", menu_image: menu_8 },
+    { menu_name: "Pasta La Vistas", menu_image: menu_1 },
+    { menu_name: "Around The World", menu_image: menu_2 },
+    { menu_name: "Rice Corner", menu_image: menu_3 },
+    { menu_name: "Chinese Corner", menu_image: menu_4 },
+    { menu_name: "BBQ Corner", menu_image: menu_5 },
+    { menu_name: "Pakistani Corner", menu_image: menu_6 },
+    { menu_name: "Sea Food", menu_image: menu_7 },
+    { menu_name: "Green's Platters", menu_image: menu_8 },
+    { menu_name: "Naan", menu_image: menu_1 },
+    { menu_name: "Smoothies", menu_image: menu_2 },
+    { menu_name: "Margaritas's", menu_image: menu_3 },
+    { menu_name: "Regular Drinks", menu_image: menu_4 },
+    { menu_name: "Icecream / Dessert", menu_image: menu_5 },
+];
 
 export const food_list = [
     {

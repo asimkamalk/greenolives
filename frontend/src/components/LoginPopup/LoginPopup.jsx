@@ -79,14 +79,14 @@ const LoginPopup = ({ setShowLogin }) => {
                             <div className="address-fields">
                                 <h4>📦 Delivery Address</h4>
                                 <div className="name-fields">
-                                    <input name='address.firstName' onChange={onChangeHandler} value={data.address.firstName} type="text" placeholder='First name' />
-                                    <input name='address.lastName' onChange={onChangeHandler} value={data.address.lastName} type="text" placeholder='Last name' />
+                                    <input name='address.firstName' onChange={onChangeHandler} value={data.address.firstName} type="text" placeholder='First name' required />
+                                    <input name='address.lastName' onChange={onChangeHandler} value={data.address.lastName} type="text" placeholder='Last name' required />
                                 </div>
                                 <div className="address-city-fields">
-                                    <input name='address.street' onChange={onChangeHandler} value={data.address.street} type="text" placeholder='Address' />
-                                    <input name='address.city' onChange={onChangeHandler} value={data.address.city} type="text" placeholder='City' />
+                                    <input name='address.street' onChange={onChangeHandler} value={data.address.street} type="text" placeholder='Address' required />
+                                    <input name='address.city' onChange={onChangeHandler} value={data.address.city} type="text" placeholder='City' required />
                                 </div>
-                                <input name='address.phone' onChange={onChangeHandler} value={data.address.phone} type="text" placeholder='Phone number' />
+                                <input name='address.phone' onChange={onChangeHandler} value={data.address.phone} type="text" placeholder='Phone number' required />
                             </div>
                         </>
                     )}

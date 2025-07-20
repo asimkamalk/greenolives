@@ -2,11 +2,41 @@ import React, { useContext } from 'react'
 import './Cart.css'
 import { StoreContext } from '../../Context/StoreContext'
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment-timezone';
 
 const Cart = () => {
 
-  const {cartItems, food_list, removeFromCart,getTotalCartAmount,url,currency,deliveryCharge, setCartItemQuantity} = useContext(StoreContext);
+  const {cartItems, food_list, removeFromCart,getTotalCartAmount,url,currency,deliveryCharge, setCartItemQuantity, restaurantHours, fetchRestaurantHours} = useContext(StoreContext);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = React.useState(true);
+  const [hoursLoaded, setHoursLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    async function checkOpenStatus() {
+      let hours = restaurantHours;
+      if (!hours) {
+        hours = await fetchRestaurantHours();
+      }
+      if (hours) {
+        const now = moment().tz(hours.timezone || 'Asia/Karachi');
+        const opening = moment.tz(hours.openingHour, 'HH:mm', hours.timezone || 'Asia/Karachi');
+        let closing = moment.tz(hours.closingHour, 'HH:mm', hours.timezone || 'Asia/Karachi');
+        if (closing.isSameOrBefore(opening)) {
+          closing.add(1, 'day');
+        }
+        if (now.isBefore(opening) || now.isAfter(closing)) {
+          setIsOpen(false);
+        } else {
+          setIsOpen(true);
+        }
+        setHoursLoaded(true);
+      } else {
+        setIsOpen(true);
+        setHoursLoaded(true);
+      }
+    }
+    checkOpenStatus();
+  }, [restaurantHours]);
 
   return (
     <div className='cart'>
@@ -42,7 +72,14 @@ const Cart = () => {
             <hr />
             <div className="cart-total-details"><b>Total</b><b>{currency}{getTotalCartAmount()===0?0:getTotalCartAmount()+deliveryCharge}</b></div>
           </div>
-          <button onClick={()=>navigate('/order')}>PROCEED TO CHECKOUT</button>
+          {!isOpen && hoursLoaded && (
+            <div style={{color:'red',textAlign:'center',margin:'16px 0',fontWeight:600,fontSize:16}}>
+              We are currently closed. Please come back at {restaurantHours ? moment(restaurantHours.openingHour, 'HH:mm').format('h:mma') : '10:00am'}!
+            </div>
+          )}
+          <button onClick={()=>navigate('/order')} disabled={!isOpen}>
+            PROCEED TO CHECKOUT
+          </button>
         </div>
       </div>
     </div>

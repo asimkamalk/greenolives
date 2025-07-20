@@ -35,7 +35,7 @@ const Footer = () => {
               </svg>
             </a>
           </div>
-          <div className="footer-company-name">foodcart</div>
+          <div className="footer-company-name"><a href="https://www.linkedin.com/company/targlabs/" target="_blank" rel="noopener noreferrer">TargLabs</a></div>
         </div>
         <div className="footer-links-row">
           <div className="footer-col">
@@ -62,7 +62,7 @@ const Footer = () => {
           <span>Copyright 2025 © foodcart - All Rights Reserved.</span>
         </div>
         <div className="footer-bottom-right">
-          <span>Powered by <b>Your Company Name</b></span>
+          <span>Powered by <b><a href="https://www.linkedin.com/company/targlabs/" target="_blank" rel="noopener noreferrer">TargLabs</a></b></span>
         </div>
       </div>
     </footer>

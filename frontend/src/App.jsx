@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify/Verify'
 import DynamicBucket from './components/DynamicBucket/DynamicBucket'
 import { AnimatePresence, motion } from 'framer-motion'
+import MyFavorites from './pages/MyFavorites';
 
 const App = () => {
 
@@ -55,6 +56,11 @@ const App = () => {
             <Route path='/verify' element={
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.5 }}>
                 <Verify />
+              </motion.div>
+            }/>
+            <Route path='/myfavorites' element={
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.5 }}>
+                <MyFavorites />
               </motion.div>
             }/>
           </Routes>

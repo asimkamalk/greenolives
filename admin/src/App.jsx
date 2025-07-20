@@ -7,6 +7,7 @@ import List from './pages/List/List'
 import Orders from './pages/Orders/Orders'
 import Login from './pages/Login/Login'
 import Sales from './pages/Sales/Sales'
+import Settings from './pages/Settings/Settings'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -48,6 +49,11 @@ const App = () => {
           <Route path="/sales" element={
             <ProtectedRoute>
               <Sales />
+            </ProtectedRoute>
+          } />
+          <Route path="/settings" element={
+            <ProtectedRoute>
+              <Settings />
             </ProtectedRoute>
           } />
         </Routes>

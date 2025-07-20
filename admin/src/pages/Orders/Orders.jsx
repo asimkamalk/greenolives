@@ -12,6 +12,7 @@ dayjs.extend(timezone);
 const Order = () => {
 
   const [orders, setOrders] = useState([]);
+  const [modalOrder, setModalOrder] = useState(null);
 
   const fetchAllOrders = async () => {
     const response = await axios.get(`${url}/api/order/list`)
@@ -46,6 +47,16 @@ const Order = () => {
     }
   }
 
+  const paymentStatusHandler = async (orderId, status) => {
+    const response = await axios.post(`${url}/api/order/payment-status`, { orderId, status });
+    if (response.data.success) {
+      toast.success(response.data.message);
+      await fetchAllOrders();
+    } else {
+      toast.error('Failed to update payment status');
+    }
+  };
+
   useEffect(() => {
     fetchAllOrders();
   }, [])
@@ -71,17 +82,16 @@ const Order = () => {
               <p style={{ fontSize: '13px', color: '#888', margin: '4px 0 0 0' }}>
                 {order.date ? dayjs(order.date).tz('Asia/Karachi').format('DD MMM YYYY, hh:mm:ss A') : ''}
               </p>
-              <p className='order-item-name'>{order.address.firstName + " " + order.address.lastName}</p>
+              <p className='order-item-name'><b>User:</b> {(order.address?.firstName || "") + " " + (order.address?.lastName || "")}</p>
+              <p className='order-item-phone'><b>Phone:</b> {order.address?.phone || '-'}</p>
               <div className='order-item-address'>
-                <p>{order.address.street}</p>
-                <p>{[
-                  order.address.city,
-                  order.address.state,
-                  order.address.country,
-                  order.address.zipcode
-                ].filter(Boolean).join(', ')}</p>
+                <b>Address:</b> {order.address?.street || ''}, {order.address?.city || ''}
               </div>
-              <p className='order-item-phone'>{order.address.phone}</p>
+              {order.paymentMethod !== 'cod' && order.paymentScreenshot && (
+                <div style={{marginTop:8}}>
+                  <button onClick={() => setModalOrder(order)} style={{background:'#FF4C24',color:'#fff',padding:'8px 18px',border:'none',borderRadius:6,cursor:'pointer',fontWeight:'bold'}}>View Payment</button>
+                </div>
+              )}
             </div>
             <p>Items : {order.items.length}</p>
             <p>{currency}{order.amount}</p>
@@ -95,6 +105,28 @@ const Order = () => {
           </div>
         ))}
       </div>
+      {modalOrder && (
+        <div style={{position:'fixed',top:0,left:0,width:'100vw',height:'100vh',background:'rgba(0,0,0,0.7)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setModalOrder(null)}>
+          <div style={{background:'#181818',padding:32,borderRadius:12,minWidth:320,maxWidth:400,position:'relative'}} onClick={e=>e.stopPropagation()}>
+            <h3 style={{marginBottom:16}}>Payment Details</h3>
+            <b>Payment Method:</b> {modalOrder.paymentMethod}<br/>
+            <b>Transaction ID:</b> {modalOrder.transactionId || '-'}<br/>
+            <b>Payment Status:</b> {modalOrder.paymentStatus === 'verified' ? <span style={{color:'#4caf50'}}>Verified</span> : modalOrder.paymentStatus === 'not_verified' ? <span style={{color:'#e53935'}}>Not Verified</span> : <span style={{color:'#FF4C24'}}>Verifying</span>}<br/>
+            {modalOrder.paymentScreenshot && (
+              <div style={{margin:'16px 0'}}>
+                <a href={url + '/images/' + modalOrder.paymentScreenshot} target="_blank" rel="noopener noreferrer">
+                  <img src={url + '/images/' + modalOrder.paymentScreenshot} alt="Payment Screenshot" style={{width:220, borderRadius:8, border:'1px solid #888'}} />
+                </a>
+              </div>
+            )}
+            <div style={{marginTop:8, display:'flex', gap:12}}>
+              <button onClick={() => { paymentStatusHandler(modalOrder._id, 'verified'); setModalOrder(null); }} style={{background:'#4caf50',color:'#fff',padding:'8px 18px',border:'none',borderRadius:6,cursor:'pointer',fontWeight:'bold'}}>Verify</button>
+              <button onClick={() => { paymentStatusHandler(modalOrder._id, 'not_verified'); setModalOrder(null); }} style={{background:'#e53935',color:'#fff',padding:'8px 18px',border:'none',borderRadius:6,cursor:'pointer',fontWeight:'bold'}}>Reject</button>
+              <button onClick={()=>setModalOrder(null)} style={{background:'#FF4C24',color:'#fff',padding:'12px 32px',border:'none',borderRadius:6,cursor:'pointer',fontWeight:'bold',fontSize:18}}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

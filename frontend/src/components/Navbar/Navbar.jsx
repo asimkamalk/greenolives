@@ -57,6 +57,7 @@ const Navbar = ({ setShowLogin }) => {
             <img src={assets.profile_icon} alt="Profile" className="transition-transform duration-200 hover:scale-110" />
             <ul className='navbar-profile-dropdown'>
               <li onClick={()=>{navigate('/myorders'); setMobileMenuOpen(false);}}> <img src={assets.bag_icon} alt="Orders" /> <p>Orders</p></li>
+              <li onClick={()=>{navigate('/myfavorites'); setMobileMenuOpen(false);}}> <span role="img" aria-label="Favorites">❤️</span> <p>Favorites</p></li>
               <hr />
               <li onClick={logout}> <img src={assets.logout_icon} alt="Logout" /> <p>Logout</p></li> 
             </ul>

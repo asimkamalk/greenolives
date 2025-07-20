@@ -73,14 +73,35 @@ const Add = () => {
                     <div className='add-category flex-col'>
                         <p>Product category</p>
                         <select name='category' onChange={onChangeHandler} >
-                            <option value="Salad">Salad</option>
-                            <option value="Rolls">Rolls</option>
-                            <option value="Deserts">Deserts</option>
+                            <option value="Appetizer">Appetizer</option>
+                            <option value="Kids Special">Kids Special</option>
+                            <option value="Salad Zone">Salad Zone</option>
+                            <option value="Green's Classic">Green's Classic</option>
+                            <option value="Soup Corner">Soup Corner</option>
+                            <option value="Green's Special">Green's Special</option>
+                            <option value="Tea Lover">Tea Lover</option>
                             <option value="Sandwich">Sandwich</option>
-                            <option value="Cake">Cake</option>
-                            <option value="Pure Veg">Pure Veg</option>
-                            <option value="Pasta">Pasta</option>
-                            <option value="Noodles">Noodles</option>
+                            <option value="Cold Coffee">Cold Coffee</option>
+                            <option value="Burger Crowd">Burger Crowd</option>
+                            <option value="Iced Coffee">Iced Coffee</option>
+                            <option value="Panini Corner">Panini Corner</option>
+                            <option value="Special Drinks">Special Drinks</option>
+                            <option value="Colada's">Colada's</option>
+                            <option value="Pizza House">Pizza House</option>
+                            <option value="Steak House">Steak House</option>
+                            <option value="Pasta La Vistas">Pasta La Vistas</option>
+                            <option value="Around The World">Around The World</option>
+                            <option value="Rice Corner">Rice Corner</option>
+                            <option value="Chinese Corner">Chinese Corner</option>
+                            <option value="BBQ Corner">BBQ Corner</option>
+                            <option value="Pakistani Corner">Pakistani Corner</option>
+                            <option value="Sea Food">Sea Food</option>
+                            <option value="Green's Platters">Green's Platters</option>
+                            <option value="Naan">Naan</option>
+                            <option value="Smoothies">Smoothies</option>
+                            <option value="Margaritas's">Margaritas's</option>
+                            <option value="Regular Drinks">Regular Drinks</option>
+                            <option value="Icecream / Dessert">Icecream / Dessert</option>
                         </select>
                     </div>
                     <div className='add-price flex-col'>

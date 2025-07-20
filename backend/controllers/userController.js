@@ -49,7 +49,22 @@ const registerUser = async (req,res) => {
         if(password.length<8){
             return res.json({success:false,message: "Please enter a strong password"})
         }
-
+        // check required address fields
+        if(!address?.firstName){
+            return res.json({success:false,message: "First name is required"})
+        }
+        if(!address?.lastName){
+            return res.json({success:false,message: "Last name is required"})
+        }
+        if(!address?.street){
+            return res.json({success:false,message: "Street address is required"})
+        }
+        if(!address?.city){
+            return res.json({success:false,message: "City is required"})
+        }
+        if(!address?.phone){
+            return res.json({success:false,message: "Phone number is required"})
+        }
         // hashing user password
         const salt = await bcrypt.genSalt(10); // the more no. round the more time it will take
         const hashedPassword = await bcrypt.hash(password, salt)
@@ -114,4 +129,46 @@ const updateUser = async (req,res) => {
     }
 }
 
-export {loginUser, registerUser, getUserData, updateUser}
+// Get user favorites
+const getFavorites = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.userId);
+        if (!user) return res.json({ success: false, message: "User not found" });
+        res.json({ success: true, favorites: user.favorites || [] });
+    } catch (error) {
+        res.json({ success: false, message: "Error fetching favorites" });
+    }
+};
+
+// Add a food to favorites
+const addFavorite = async (req, res) => {
+    try {
+        const { foodId } = req.body;
+        const user = await userModel.findById(req.userId);
+        if (!user) return res.json({ success: false, message: "User not found" });
+        if (!user.favorites) user.favorites = [];
+        if (!user.favorites.includes(foodId)) {
+            user.favorites.push(foodId);
+            await user.save();
+        }
+        res.json({ success: true, favorites: user.favorites });
+    } catch (error) {
+        res.json({ success: false, message: "Error adding favorite" });
+    }
+};
+
+// Remove a food from favorites
+const removeFavorite = async (req, res) => {
+    try {
+        const { foodId } = req.body;
+        const user = await userModel.findById(req.userId);
+        if (!user) return res.json({ success: false, message: "User not found" });
+        user.favorites = (user.favorites || []).filter(id => id !== foodId);
+        await user.save();
+        res.json({ success: true, favorites: user.favorites });
+    } catch (error) {
+        res.json({ success: false, message: "Error removing favorite" });
+    }
+};
+
+export {loginUser, registerUser, getUserData, updateUser, getFavorites, addFavorite, removeFavorite}
