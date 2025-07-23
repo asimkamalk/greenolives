@@ -351,6 +351,6 @@ export const food_list = [
     }
 ]
 
-export const url = "http://localhost:4001";
+export const url = "https://greenolives.onrender.com";
 
 export const currency = 'RS'
