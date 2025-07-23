@@ -13,7 +13,7 @@ const Settings = () => {
     const fetchSettings = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:4001/api/settings');
+        const res = await axios.get('https://greenolives.onrender.com/api/settings');
         if (res.data.success && res.data.data) {
           setOpeningHour(res.data.data.openingHour || '10:00');
           setClosingHour(res.data.data.closingHour || '00:00');
@@ -31,7 +31,7 @@ const Settings = () => {
     e.preventDefault();
     setSaving(true);
     try {
-      const res = await axios.post('http://localhost:4001/api/settings/update', {
+      const res = await axios.post('https://greenolives.onrender.com/api/settings/update', {
         openingHour,
         closingHour,
         timezone,

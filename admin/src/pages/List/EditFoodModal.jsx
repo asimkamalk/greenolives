@@ -33,7 +33,7 @@ const EditFoodModal = ({ food, onClose, onUpdated }) => {
       formData.append('price', form.price);
       formData.append('category', form.category);
       if (image) formData.append('image', image);
-      const response = await axios.post('http://localhost:4001/api/food/update', formData);
+      const response = await axios.post('https://greenolives.onrender.com/4001/api/food/update', formData);
       if (response.data.success) {
         toast.success('Food updated successfully!');
         onUpdated();
