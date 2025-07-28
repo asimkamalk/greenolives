@@ -1,11 +1,5 @@
 {
-  "routes": [
-    { "src": "/cart", "dest": "/index.html" },
-    { "src": "/order", "dest": "/index.html" },
-    { "src": "/myorders", "dest": "/index.html" },
-    { "src": "/profile", "dest": "/index.html" },
-    { "src": "/verify", "dest": "/index.html" },
-    { "src": "/myfavorites", "dest": "/index.html" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 } 
