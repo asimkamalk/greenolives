@@ -2,9 +2,13 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
-  "redirects": [
-    { "source": "/cart", "destination": "/index.html" },
-    { "source": "/menu", "destination": "/index.html" },
-    { "source": "/contact", "destination": "/index.html" }
+  "routes": [
+    { "src": "/cart", "dest": "/index.html" },
+    { "src": "/order", "dest": "/index.html" },
+    { "src": "/myorders", "dest": "/index.html" },
+    { "src": "/profile", "dest": "/index.html" },
+    { "src": "/verify", "dest": "/index.html" },
+    { "src": "/myfavorites", "dest": "/index.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 } 
