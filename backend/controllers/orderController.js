@@ -57,6 +57,7 @@ const placeOrder = async (req, res) => {
             paymentScreenshot,
             paymentStatus: req.body.paymentMethod === 'cod' ? 'verified' : 'pending',
             payment: req.body.paymentMethod === 'cod',
+            orderType: req.body.orderType || 'delivery', // Add order type
         });
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });

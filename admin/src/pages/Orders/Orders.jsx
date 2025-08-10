@@ -87,6 +87,10 @@ const Order = () => {
               <div className='order-item-address'>
                 <b>Address:</b> {order.address?.street || ''}, {order.address?.city || ''}
               </div>
+              {/* Add Order Type indicator */}
+              <div style={{marginTop: '5px'}}>
+                <b>Order Type:</b> <span style={{fontWeight: 'bold', color: order.orderType === 'pickup' ? '#FF4C24' : 'inherit'}}>{order.orderType === 'pickup' ? 'Pick Up' : 'Delivery'}</span>
+              </div>
               {order.paymentMethod !== 'cod' && order.paymentScreenshot && (
                 <div style={{marginTop:8}}>
                   <button onClick={() => setModalOrder(order)} style={{background:'#FF4C24',color:'#fff',padding:'8px 18px',border:'none',borderRadius:6,cursor:'pointer',fontWeight:'bold'}}>View Payment</button>

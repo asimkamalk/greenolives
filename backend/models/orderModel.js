@@ -11,7 +11,8 @@ const orderSchema = new mongoose.Schema({
     paymentMethod: { type: String, default: 'cod' },
     transactionId: { type: String },
     paymentScreenshot: { type: String },
-    paymentStatus: { type: String, default: 'pending' } // 'pending', 'verified', 'not_verified'
+    paymentStatus: { type: String, default: 'pending' }, // 'pending', 'verified', 'not_verified'
+    orderType: { type: String, default: 'delivery' } // 'delivery' or 'pickup'
 })
 
 const orderModel = mongoose.models.order || mongoose.model("order", orderSchema);

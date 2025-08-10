@@ -155,7 +155,7 @@ const PlaceOrder = () => {
         )}
         <form onSubmit={placeOrder} className='place-order'>
             <div className="place-order-left">
-                <p className='title'>Order Information</p>
+                <p className='title'>Delivery Information</p>
                 
                 {/* Add Order Type Selection */}
                 <div className="order-type" style={{marginBottom: '20px'}}>
@@ -207,7 +207,7 @@ const PlaceOrder = () => {
                     <h2>Cart Totals</h2>
                     <div>
                         <div className="cart-total-details"><p>Subtotal</p><p>{currency}{getTotalCartAmount()}</p></div>
-.                        <hr />
+                        <hr />
                         {orderType === "delivery" && (
                             <>
                                 <div className="cart-total-details"><p>Delivery Fee</p><p>{currency}{getTotalCartAmount() === 0 ? 0 : deliveryCharge}</p></div>
