@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    min-height: 60vh; /* Changed from 100vh to 60vh for less blank space */
+    min-height: 45vh; /* Reduced from 60vh to 45vh to minimize blank space */
     padding: 0; 
     margin: 0 auto; 
     position: relative;
@@ -12,7 +12,7 @@
 }
 
 .slider-item {
-    height: 60vh; /* Changed from 100vh to 60vh to match header */
+    height: 45vh; /* Matched with header height */
     width: 100%;
 }
 
@@ -26,21 +26,21 @@
 }
 
 .slider-item {
-    height: 100vh; /* Changed from 420px to 100vh for full height */
+    height: 45vh; /* Matched with header height */
     width: 100%;
 }
 
 .slider-image {
     height: 100%;
     width: 100%;
-    background-size: contain; /* Changed from 'cover' to 'contain' to show the full image */
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 /* Remove the dark overlay completely */
 .header-overlay {
-    display: none; /* Hide the overlay completely */
+    display: none;
 }
 
 .header-contents {
@@ -179,15 +179,15 @@
 /* Update the mobile media queries for better visibility */
 @media (max-width: 750px) {
     .header {
-        min-height: 70vh; /* Changed from 100vh to 70vh */
-        height: 70vh;
+        min-height: 50vh; /* Reduced height for mobile */
+        height: 50vh;
         border-radius: 0;
         padding: 0;
         margin: 0;
     }
     .slider-item {
-        height: 70vh; /* Changed from 100vh to 70vh */
-        min-height: 70vh;
+        height: 50vh;
+        min-height: 50vh;
     }
     .header-contents {
         max-width: 100%;
@@ -199,21 +199,21 @@
         padding: 5vw 4vw;
         position: absolute;
         align-items: flex-start;
-        background: rgba(0,0,0,0); /* Completely transparent background */
+        background: rgba(0,0,0,0);
         border-radius: 0;
     }
     .header-contents h2 {
         font-size: max(6vw, 22px);
         color: #fff;
         margin-bottom: 1vw;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.9); /* Stronger text shadow for visibility */
+        text-shadow: 0 2px 8px rgba(0,0,0,0.9);
     }
     .header-contents p {
         font-size: max(3vw, 14px);
         margin-bottom: 2vw;
         color: #fff;
         display: block;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.9); /* Stronger text shadow for visibility */
+        text-shadow: 0 2px 8px rgba(0,0,0,0.9);
         line-height: 1.4;
     }
     .header-contents button {
@@ -224,37 +224,37 @@
     }
     
     .slider-image {
-        background-size: contain; /* Ensure full image is visible */
-        background-color: #000; /* Add black background to fill empty space */
+        background-size: contain;
+        background-color: #000;
     }
 }
 
 /* Enhanced fix for very small screens */
 @media (max-width: 480px) {
     .header {
-        min-height: 60vh; /* Changed from 100vh to 60vh */
-        height: 60vh;
+        min-height: 45vh; /* Reduced height for smaller screens */
+        height: 45vh;
         margin: 0;
         border-radius: 0;
     }
     .slider-item {
-        height: 60vh; /* Changed from 100vh to 60vh */
-        min-height: 60vh;
+        height: 45vh;
+        min-height: 45vh;
     }
     .header-contents {
         padding: 4vw 4vw 6vw 4vw;
-        background: rgba(0,0,0,0); /* Completely transparent background */
+        background: rgba(0,0,0,0);
     }
     .header-contents h2 {
         font-size: max(7vw, 20px);
         line-height: 1.2;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.9); /* Stronger text shadow for visibility */
+        text-shadow: 0 2px 8px rgba(0,0,0,0.9);
     }
     .header-contents p {
         font-size: max(4vw, 13px);
         margin-bottom: 4vw;
         line-height: 1.3;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.9); /* Stronger text shadow for visibility */
+        text-shadow: 0 2px 8px rgba(0,0,0,0.9);
     }
     .header-contents button {
         padding: 3.5vw 8vw;
