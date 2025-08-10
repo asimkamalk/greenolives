@@ -12,7 +12,7 @@ const Add = () => {
         name: "",
         description: "",
         price: "",
-        category: "Salad"
+        category: "Appetizer"
     });
 
     const onSubmitHandler = async (event) => {
