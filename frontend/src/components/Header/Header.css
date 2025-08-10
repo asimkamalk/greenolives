@@ -33,13 +33,9 @@
     background-repeat: no-repeat;
 }
 
-/* Replace the dark overlay with a much lighter one or remove it completely */
+/* Remove the dark overlay completely */
 .header-overlay {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(120deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
-    z-index: 1;
+    display: none; /* Hide the overlay completely */
 }
 
 .header-contents {
@@ -165,21 +161,28 @@
     }
 }
 
+/* Hide slider dots and arrows on all devices */
+.slider-container .slick-dots {
+    display: none !important;
+}
+
+.slider-container .slick-prev, 
+.slider-container .slick-next {
+    display: none !important;
+}
+
 /* Update the mobile media queries for better visibility */
 @media (max-width: 750px) {
     .header {
-        min-height: 320px;
-        height: 70vw; /* Increased from 60vw for better visibility */
-        border-radius: 18px;
+        min-height: 100vh; /* Full viewport height */
+        height: 100vh;
+        border-radius: 0; /* Remove border radius on mobile */
         padding: 0;
-        margin: 15px auto; /* Reduced margin for mobile */
+        margin: 0; /* Remove all margins */
     }
     .slider-item {
-        height: 70vw; /* Match the header height */
-        min-height: 320px;
-    }
-    .header-overlay {
-        background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%);
+        height: 100vh; /* Full viewport height */
+        min-height: 100vh;
     }
     .header-contents {
         max-width: 100%;
@@ -187,68 +190,65 @@
         right: 0;
         margin: 0 auto;
         bottom: 0;
-        gap: 2vw; /* Reduced gap for tighter layout */
+        gap: 2vw;
         padding: 5vw 4vw;
         position: absolute;
         align-items: flex-start;
-        background: rgba(0,0,0,0.3); /* Much lighter background */
-        border-radius: 0 0 18px 18px;
+        background: rgba(0,0,0,0); /* Completely transparent background */
+        border-radius: 0;
     }
     .header-contents h2 {
         font-size: max(6vw, 22px);
         color: #fff;
-        margin-bottom: 1vw; /* Reduced margin */
-        text-shadow: 0 2px 8px rgba(0,0,0,0.7); /* Enhanced text shadow for visibility */
+        margin-bottom: 1vw;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.9); /* Stronger text shadow for visibility */
     }
     .header-contents p {
         font-size: max(3vw, 14px);
         margin-bottom: 2vw;
-        color: #fff; /* Changed from #fffbe6 for better contrast */
+        color: #fff;
         display: block;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.7); /* Enhanced text shadow for visibility */
-        line-height: 1.4; /* Improved line height for readability */
+        text-shadow: 0 2px 8px rgba(0,0,0,0.9); /* Stronger text shadow for visibility */
+        line-height: 1.4;
+    }
+    .header-contents button {
+        padding: 3vw 7vw;
+        font-size: max(3vw, 15px);
+        margin-top: 1vw;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 }
 
 /* Enhanced fix for very small screens */
 @media (max-width: 480px) {
     .header {
-        min-height: 300px; /* Increased from 280px */
-        height: 100vw; /* Increased from 80vw for better visibility */
-        margin: 10px auto; /* Further reduced margin */
+        min-height: 100vh;
+        height: 100vh;
+        margin: 0;
+        border-radius: 0;
     }
     .slider-item {
-        height: 100vw; /* Match the header height */
-        min-height: 300px;
+        height: 100vh;
+        min-height: 100vh;
     }
     .header-contents {
-        padding: 4vw 4vw 6vw 4vw; /* Added more padding at bottom */
-        background: rgba(0,0,0,0.3); /* Much lighter background */
+        padding: 4vw 4vw 6vw 4vw;
+        background: rgba(0,0,0,0); /* Completely transparent background */
     }
     .header-contents h2 {
-        font-size: max(7vw, 20px); /* Increased font size */
+        font-size: max(7vw, 20px);
         line-height: 1.2;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.7); /* Enhanced text shadow for visibility */
+        text-shadow: 0 2px 8px rgba(0,0,0,0.9); /* Stronger text shadow for visibility */
     }
     .header-contents p {
-        font-size: max(4vw, 13px); /* Increased font size */
+        font-size: max(4vw, 13px);
         margin-bottom: 4vw;
         line-height: 1.3;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.7); /* Enhanced text shadow for visibility */
+        text-shadow: 0 2px 8px rgba(0,0,0,0.9); /* Stronger text shadow for visibility */
     }
     .header-contents button {
-        padding: 3.5vw 8vw; /* Larger button */
+        padding: 3.5vw 8vw;
         font-size: max(4vw, 14px);
-        border-radius: 30px; /* More rounded button */
-    }
-    /* Adjust slider dots position for very small screens */
-    .slider-container .slick-dots {
-        bottom: 80px;
-    }
-    /* Make dots more visible */
-    .slider-container .slick-dots li button:before {
-        font-size: 12px;
-        color: #fff;
-        opacity: 0.8;
+        border-radius: 30px;
     }
 }
