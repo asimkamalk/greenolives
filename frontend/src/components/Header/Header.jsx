@@ -13,18 +13,19 @@ const Header = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 4000,
         pauseOnHover: true,
-        arrows: false
+        arrows: true,
+        fade: true,
+        cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
     }
 
-    // Array of slider images
+    // Array of slider images - using the slider images from backend uploads
     const sliderImages = [
         '/olive_hero.jpg',
         '/header_img.png',
-        // For the third image, you can use one from your assets or add a new one
-        // For now, I'll reuse olive_hero.jpg as a placeholder
-        '/olive_hero.jpg'
+        // Using slider images from backend
+        `${process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : ''}/images/slider-1754817530777-507369641-WhatsApp Image 2025-08-06 at 21.53.09_0e70534c.jpg`
     ]
 
     return (
@@ -41,6 +42,7 @@ const Header = () => {
                     ))}
                 </Slider>
             </div>
+            <div className='header-overlay'></div>
             <div className='header-contents'>
                 <h2>Order your <span className="highlight">favourite</span> food here</h2>
                 <p>Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingredients and culinary expertise. Our mission is to satisfy your cravings and elevate your dining experience, one delicious meal at a time.</p>
