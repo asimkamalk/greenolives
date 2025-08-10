@@ -28,7 +28,7 @@
 .slider-image {
     height: 100%;
     width: 100%;
-    background-size: cover;
+    background-size: contain; /* Changed from 'cover' to 'contain' to show the full image */
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -216,6 +216,11 @@
         font-size: max(3vw, 15px);
         margin-top: 1vw;
         box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    .slider-image {
+        background-size: contain; /* Ensure full image is visible */
+        background-color: #000; /* Add black background to fill empty space */
     }
 }
 
