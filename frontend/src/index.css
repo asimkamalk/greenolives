@@ -31,6 +31,18 @@ body {
   color: #e6e8d7; /* Light text for good contrast */
 }
 
+/* Override any orange colors that might be coming from system UI */
+* {
+  /* Remove any orange tints */
+  --orange-override: none !important;
+}
+
+/* Ensure clean colors throughout the app */
+.app {
+  /* Override any system colors */
+  color-scheme: dark !important;
+}
+
 a {
   text-decoration: none;
   color: inherit;
