@@ -79,7 +79,7 @@ const List = () => {
         {list.map((item, index) => {
           return (
             <div key={index} className='list-table-format'>
-              <img src={`${url}/images/` + item.image} alt="" />
+              <img src={item.image.startsWith('http') ? item.image : `${url}/images/${item.image}`} alt="" />
               <p>{item.name}</p>
               <td style={{display: 'flex', gap: 12, alignItems: 'center'}}>
                 <span style={{cursor: 'pointer'}} title="Toggle Popular" onClick={() => handleToggleFlag(item._id, 'isPopular', !item.isPopular)}>

@@ -30,7 +30,7 @@ const FoodItem = ({ image, name, price, desc, id, onCardClick }) => {
       transition={{ duration: 0.4, ease: 'easeOut' }}
     >
       <div className='food-item-img-container'>
-        <img className='food-item-image' src={url + "/images/" + image} alt={name} />
+        <img className='food-item-image' src={image.startsWith('http') ? image : url + "/images/" + image} alt={name} />
         {!cartItems[id] ? (
           <img className='add' onClick={e => { e.stopPropagation(); addToCart(id); }} src={assets.add_icon_white} alt="Add" />
         ) : (
@@ -54,7 +54,7 @@ const FoodItem = ({ image, name, price, desc, id, onCardClick }) => {
             onClick={handleFavoriteClick}
             title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
-            {isFavorite ? '❤️' : '🤍'}
+            {isFavorite ? '💚' : '🤍'}
           </span>
         </div>
         <p className="food-item-desc">{desc}</p>

@@ -10,7 +10,7 @@ const FoodDetailsModal = ({ food, onClose }) => {
     <div className="food-details-modal-backdrop" onClick={onClose}>
       <div className="food-details-modal" onClick={e => e.stopPropagation()}>
         <button className="food-details-close" onClick={onClose}>×</button>
-        <img className="food-details-image" src={url + '/images/' + food.image} alt={food.name} />
+        <img className="food-details-image" src={food.image.startsWith('http') ? food.image : url + '/images/' + food.image} alt={food.name} />
         <h2>{food.name}</h2>
         <p className="food-details-desc">{food.description}</p>
         <div className="food-details-bottom">
