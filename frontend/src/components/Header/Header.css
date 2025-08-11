@@ -10,6 +10,7 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.15) !important;
     width: 100% !important;
     max-width: 1200px !important;
+    background: linear-gradient(135deg, #2a3400, #4e561f, #636B2F) !important; /* Olive green gradient background */
 }
 
 .slider-container {
