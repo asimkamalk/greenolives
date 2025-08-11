@@ -27,10 +27,9 @@
 body {
   min-height: 100vh;
   font-family: var(--font-main);
-  background: #000;
-  color: #636B2F;
+  background: linear-gradient(135deg, #000000, #0b1a00, #304b00, #556b00);
+  color: #e6e8d7; /* Light, soft text for contrast */
 }
-
 a {
   text-decoration: none;
   color: inherit;
