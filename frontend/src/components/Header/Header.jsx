@@ -21,8 +21,8 @@ const Header = () => {
 
     // Simplified image array
     const sliderImages = [
-        '/olive_hero.jpg',
-        '/header_img.png'
+        '/olive_hero.jpg'
+        // Removed '/header_img.png' - this was the orange cheese wedge
     ]
 
     const handleViewMenuClick = () => {
