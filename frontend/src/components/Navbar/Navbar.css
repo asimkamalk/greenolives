@@ -279,3 +279,9 @@
         animation: fadeIn 0.2s;
     }
 }
+
+@media (max-width: 750px) {
+    .navbar .logo {
+      width: 85px; /* smaller on small/mobile devices */
+    }
+  }
