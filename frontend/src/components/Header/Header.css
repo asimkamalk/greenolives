@@ -1,257 +1,223 @@
+/* RESET AND FORCE VISIBILITY - Debug Version */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 60vh; /* Increased back to 60vh for better visual impact */
-    padding: 0; 
-    margin: 20px auto 0; /* Added top margin for spacing from navbar */
-    position: relative;
-    border-radius: 32px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-}
-
-.slider-item {
-    height: 60vh; /* Matched with header height */
-    width: 100%;
+    display: block !important;
+    position: relative !important;
+    min-height: 60vh !important;
+    padding: 0 !important; 
+    margin: 20px auto 0 !important;
+    border-radius: 32px !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15) !important;
+    width: 100% !important;
+    max-width: 1200px !important;
 }
 
 .slider-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1 !important;
+}
+
+.slider-item {
+    height: 60vh !important;
+    width: 100% !important;
 }
 
 .slider-image {
-    height: 100%;
-    width: 100%;
-    background-size: cover; /* Changed from contain to cover */
-    background-position: center;
-    background-repeat: no-repeat;
+    height: 100% !important;
+    width: 100% !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
 
-/* Add a subtle dark overlay for better text readability */
+/* Dark overlay for desktop/tablet */
 .header-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
-    z-index: 1;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0,0,0,0.6) !important;
+    z-index: 2 !important;
 }
 
+/* FORCE TEXT VISIBILITY */
 .header-contents {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5vw;
-    max-width: 50%; /* Increased for better text layout */
-    left: 4vw;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    animation: fadeIn 2s;
-    padding: 2vw 2vw 2vw 0;
+    position: absolute !important;
+    top: 50% !important;
+    left: 4vw !important;
+    transform: translateY(-50%) !important;
+    z-index: 999 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: 50% !important;
+    color: white !important;
 }
 
-.header-contents h2{
-    font-weight: 700;
-    color: #fff;
-    font-size: max(4.5vw, 36px); /* Slightly adjusted for better scaling */
-    line-height: 1.1;
-    margin-bottom: 0.5vw;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.6); /* Enhanced text shadow */
+.header-contents h2 {
+    color: white !important;
+    font-size: 48px !important;
+    font-weight: 700 !important;
+    margin-bottom: 16px !important;
+    text-shadow: 2px 2px 8px rgba(0,0,0,1) !important;
+    line-height: 1.1 !important;
 }
 
 .header-contents h2 .highlight {
-    color: #FF4C24;
-    background: linear-gradient(90deg, #FF4C24 60%, #ff7e5f 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none; /* Remove text shadow from highlighted text */
+    color: #FF4C24 !important;
+    background: linear-gradient(90deg, #FF4C24 60%, #ff7e5f 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
 }
 
-.header-contents p{
-    color: #fffbe6;
-    font-size: max(1.2vw, 16px); /* Slightly increased for better readability */
-    font-weight: 400;
-    margin-bottom: 1vw;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.6); /* Enhanced text shadow */
-    line-height: 1.5; /* Better line height */
+.header-contents p {
+    color: white !important;
+    font-size: 18px !important;
+    margin-bottom: 24px !important;
+    text-shadow: 2px 2px 8px rgba(0,0,0,1) !important;
+    line-height: 1.5 !important;
 }
 
-.header-contents button{
-    border: none;
-    color: #fff;
-    font-weight: 600;
-    padding: 1.2vw 2.8vw;
-    background: linear-gradient(90deg, #FF4C24 60%, #ff7e5f 100%);
-    font-size: max(1.2vw, 16px);
-    border-radius: 50px;
-    box-shadow: 0 4px 16px rgba(255,76,36,0.3); /* Enhanced shadow */
-    cursor: pointer;
-    transition: all 0.3s ease; /* Smoother transition */
-    margin-top: 0.5vw;
-    letter-spacing: 0.01em;
+.header-contents button {
+    border: none !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 16px 32px !important;
+    background: linear-gradient(90deg, #808000 60%, #a3a354 100%) !important; /* Green Olives */
+    font-size: 16px !important;
+    border-radius: 50px !important;
+    box-shadow: 0 4px 16px rgba(255,76,36,0.4) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
 }
 
-.header-contents button:hover, .header-contents button:focus {
-    background: linear-gradient(90deg, #ff7e5f 60%, #FF4C24 100%);
-    color: #fffbe6;
-    box-shadow: 0 8px 32px rgba(255,76,36,0.4);
-    transform: translateY(-2px); /* Subtle lift effect */
-    outline: none;
+.header-contents button:hover {
+    background: linear-gradient(90deg, #a3a354 60%, #808000 100%) !important;
+    box-shadow: 0 8px 32px rgba(255,76,36,0.5) !important;
+    transform: translateY(-2px) !important;
 }
 
-/* Hide slider dots and arrows on all devices */
-.slider-container .slick-dots {
-    display: none !important;
-}
-
-.slider-container .slick-prev, 
-.slider-container .slick-next {
+/* Hide all slider controls */
+.slick-dots,
+.slick-prev,
+.slick-next,
+.slick-arrow {
     display: none !important;
 }
 
 /* Tablet styles */
 @media (max-width: 1050px) {
     .header {
-        min-height: 50vh;
-        height: 50vh;
-        padding: 0;
-        border-radius: 24px;
-    }
-    .slider-item {
-        height: 50vh;
-    }
-    .header-contents {
-        max-width: 65%;
-        left: 4vw;
-        bottom: 8%;
-        position: absolute;
-    }
-    .header-contents h2 {
-        font-size: max(5vw, 28px);
-    }
-    .header-contents p {
-        font-size: max(2vw, 15px);
-    }
-    .header-contents button {
-        padding: 2vw 4vw;
-        font-size: max(2.2vw, 15px);
-    }
-}
-
-/* Mobile styles */
-@media (max-width: 750px) {
-    .header {
-        min-height: 70vh; /* Increased significantly for mobile */
-        height: 70vh;
-        border-radius: 16px;
-        padding: 0;
-        margin: 15px 2vw 0; /* Added top margin for mobile navbar spacing */
-    }
-    .slider-item {
-        height: 70vh;
-        min-height: 70vh;
-    }
-    .header-contents {
-        max-width: 85%; /* Better width for mobile */
-        left: 7.5vw;
-        right: 7.5vw;
-        top: 50%;
-        transform: translateY(-50%);
-        margin: 0;
-        gap: 4vw;
-        padding: 4vw;
-        position: absolute;
-        align-items: flex-start;
-        background: rgba(0,0,0,0.3); /* Subtle background for better text readability */
-        border-radius: 16px;
-    }
-    .header-contents h2 {
-        font-size: max(7vw, 26px); /* Better mobile scaling */
-        color: #fff;
-        margin-bottom: 2vw;
-        text-shadow: 0 3px 12px rgba(0,0,0,0.9); /* Stronger shadow for mobile */
-        line-height: 1.1;
-    }
-    .header-contents p {
-        font-size: max(3.8vw, 15px); /* Better mobile scaling */
-        margin-bottom: 4vw;
-        color: #fff;
-        display: block;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.9); /* Stronger shadow for mobile */
-        line-height: 1.4;
-    }
-    .header-contents button {
-        padding: 3.5vw 7vw;
-        font-size: max(3.8vw, 15px);
-        margin-top: 2vw;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-        border-radius: 40px;
+        min-height: 50vh !important;
+        margin: 15px auto 0 !important;
+        border-radius: 24px !important;
     }
     
-    .slider-image {
-        background-size: cover; /* Ensure cover on mobile too */
-        background-position: center;
+    .slider-item {
+        height: 50vh !important;
+    }
+    
+    .header-contents {
+        max-width: 65% !important;
+    }
+    
+    .header-contents h2 {
+        font-size: 36px !important;
+    }
+    
+    .header-contents p {
+        font-size: 16px !important;
+    }
+    
+    .header-contents button {
+        padding: 14px 28px !important;
+        font-size: 15px !important;
     }
 }
 
-/* Enhanced fix for very small screens */
+/* Mobile styles - Full image + readable text */
+@media (max-width: 750px) {
+    .header {
+        min-height: 70vh !important;
+        margin: 15px 4vw 0 !important;
+        border-radius: 16px !important;
+    }
+    
+    .slider-item {
+        height: 70vh !important;
+    }
+    
+    /* Very light overlay to maximize image visibility */
+    .header-overlay {
+        background: rgba(0,0,0,0.15) !important; /* Reduced from 0.3 to 0.15 */
+    }
+    
+    .header-contents {
+        position: absolute !important;
+        top: 50% !important;
+        left: 6vw !important;
+        transform: translateY(-50%) !important;
+        text-align: left !important;
+        max-width: 85% !important; /* Slightly reduced to prevent edge crowding */
+        z-index: 999 !important;
+        padding: 15px 0 !important; /* Added vertical padding */
+    }
+    
+    /* Enhanced text visibility with subtle text background */
+    .header-contents h2 {
+        font-size: 28px !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
+        display: inline-block !important;
+        background: rgba(0,0,0,0.25) !important; /* Semi-transparent background */
+        padding: 4px 8px !important;
+        border-radius: 4px !important;
+    }
+    
+    .header-contents p {
+        font-size: 15px !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
+        background: rgba(0,0,0,0.2) !important; /* Semi-transparent background */
+        padding: 4px 8px !important;
+        border-radius: 4px !important;
+        display: inline-block !important;
+    }
+    
+    .header-contents button {
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+        margin-top: 10px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    }
+}
+
+/* Small mobile adjustments */
 @media (max-width: 480px) {
     .header {
-        min-height: 65vh;
-        height: 65vh;
-        margin: 10px 1vw 0;
-        border-radius: 12px;
+        min-height: 65vh !important;
+        margin: 10px 2vw 0 !important;
     }
+    
     .slider-item {
-        height: 65vh;
-        min-height: 65vh;
+        height: 65vh !important;
     }
+    
     .header-contents {
-        max-width: 80%;
-        left: 10vw;
-        padding: 5vw;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0,0,0,0.4);
-        border-radius: 12px;
+        left: 4vw !important;
+        max-width: 90% !important;
     }
+    
     .header-contents h2 {
-        font-size: max(8vw, 22px);
-        line-height: 1.1;
-        text-shadow: 0 3px 15px rgba(0,0,0,0.9);
-        margin-bottom: 3vw;
+        font-size: 24px !important;
+        padding: 3px 6px !important;
     }
+    
     .header-contents p {
-        font-size: max(4vw, 14px);
-        margin-bottom: 5vw;
-        line-height: 1.3;
-        text-shadow: 0 2px 12px rgba(0,0,0,0.9);
-    }
-    .header-contents button {
-        padding: 4vw 8vw;
-        font-size: max(4vw, 14px);
-        border-radius: 35px;
-    }
-}
-
-/* Add fadeIn animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+        font-size: 14px !important;
+        padding: 3px 6px !important;
     }
 }

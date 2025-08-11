@@ -33,3 +33,4 @@ frontend/uploads/
 # Vercel/Netlify/other deploy configs
 .vercel/
 .netlify/ 
+.vercel
