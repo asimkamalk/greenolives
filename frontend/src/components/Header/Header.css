@@ -95,14 +95,14 @@
     background: linear-gradient(90deg, #808000 60%, #a3a354 100%) !important;
     font-size: 16px !important;
     border-radius: 50px !important;
-    box-shadow: 0 4px 16px rgba(255,76,36,0.4) !important;
+    box-shadow: 0 4px 16px rgba(99,107,47,0.4) !important; /* Changed to olive green */
     cursor: pointer !important;
     transition: all 0.3s ease !important;
 }
 
 .header-contents button:hover {
     background: linear-gradient(90deg, #a3a354 60%, #808000 100%) !important;
-    box-shadow: 0 8px 32px rgba(255,76,36,0.5) !important;
+    box-shadow: 0 8px 32px rgba(99,107,47,0.5) !important; /* Changed to olive green */
     transform: translateY(-2px) !important;
 }
 
