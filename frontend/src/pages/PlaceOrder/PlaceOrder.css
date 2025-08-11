@@ -30,14 +30,15 @@
     width: 100%;
     max-width: max(40%,500px);
 }
-.place-order-submit{
+.place-order-submit {
     margin-top: 50px;
     border: none;
-    background-color: tomato;
+    background: linear-gradient(90deg, #808000 60%, #a3a354 100%);
     color: white;
     padding: 12px 30px;
     border-radius: 4px;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 .payment{
     display: flex;

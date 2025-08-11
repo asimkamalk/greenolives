@@ -63,14 +63,13 @@
 
 .cart-total button {
     border: none;
-    color: white;
-    background-color: #FF4C24;
-    width: max(15vw,200px);
+    color: black;
+    background: linear-gradient(90deg, #808000 60%, #a3a354 100%);
+    width: max(15vw, 200px);
     padding: 12px 0px;
     border-radius: 4px;
     cursor: pointer;
 }
-
 .cart-promocode {
     flex: 1;
 }

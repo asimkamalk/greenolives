@@ -38,6 +38,15 @@ const PlaceOrder = () => {
         setData(data => ({ ...data, [name]: value }))
     }
 
+    // New function to determine delivery charge based on city
+    const getConditionalDeliveryCharge = () => {
+      if (!data.city) return deliveryCharge;
+      if (data.city.trim().toLowerCase() === "hayatabad") {
+        return 0;
+      }
+      return 200;
+    };
+
     const placeOrder = async (e) => {
         e.preventDefault();
         let orderItems = [];
@@ -51,7 +60,7 @@ const PlaceOrder = () => {
         let formData = new FormData();
         formData.append('address', JSON.stringify(data));
         formData.append('items', JSON.stringify(orderItems));
-        formData.append('amount', getTotalCartAmount() + (orderType === "delivery" ? deliveryCharge : 0));
+        formData.append('amount', getTotalCartAmount() + (orderType === "delivery" ? getConditionalDeliveryCharge() : 0));
         formData.append('userId', userId);
         formData.append('paymentMethod', payment);
         formData.append('orderType', orderType); // Add order type to form data
@@ -195,7 +204,7 @@ const PlaceOrder = () => {
                 {/* Only show address fields for delivery */}
                 {orderType === "delivery" && (
                     <>
-                        <input type="text" name='street' onChange={onChangeHandler} value={data.street} placeholder='Street' required />
+                        <input type="text" name='street' onChange={onChangeHandler} value={data.street} placeholder='Street/Full Adress' required />
                         <input type="text" name='city' onChange={onChangeHandler} value={data.city} placeholder='City' required />
                     </>
                 )}
@@ -210,11 +219,11 @@ const PlaceOrder = () => {
                         <hr />
                         {orderType === "delivery" && (
                             <>
-                                <div className="cart-total-details"><p>Delivery Fee</p><p>{currency}{getTotalCartAmount() === 0 ? 0 : deliveryCharge}</p></div>
+                                <div className="cart-total-details"><p>Delivery Fee</p><p>{currency}{getTotalCartAmount() === 0 ? 0 : getConditionalDeliveryCharge()}</p></div>
                                 <hr />
                             </>
                         )}
-                        <div className="cart-total-details"><b>Total</b><b>{currency}{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + (orderType === "delivery" ? deliveryCharge : 0)}</b></div>
+                        <div className="cart-total-details"><b>Total</b><b>{currency}{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + (orderType === "delivery" ? getConditionalDeliveryCharge() : 0)}</b></div>
                     </div>
                 </div>
                 <div className="payment">

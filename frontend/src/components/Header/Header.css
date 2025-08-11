@@ -70,10 +70,13 @@
 }
 
 .header-contents h2 .highlight {
-    color: #FF4C24 !important;
-    background: linear-gradient(90deg, #FF4C24 60%, #ff7e5f 100%) !important;
+    background: linear-gradient(90deg, #808000 60%, #a3a354 100%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    font-weight: 700 !important;
+    text-shadow: 1px 1px 2px rgba(128,128,0,0.8) !important; /* subtle shadow for contrast */
 }
 
 .header-contents p {
