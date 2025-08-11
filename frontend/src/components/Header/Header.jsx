@@ -1,7 +1,31 @@
 import React from 'react'
 import './Header.css'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 const Header = () => {
+    // Slider settings for 3 images
+    const settings = {
+        dots: false,
+        arrows: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        fade: true,
+        pauseOnHover: true
+    }
+
+    // 3 images for the slider as requested
+    const sliderImages = [
+        '/olive_hero.jpg',
+        '/header_img.png',
+        '/logo.jpg'
+    ]
+
     const handleViewMenuClick = () => {
         console.log('Button clicked!') // Debug log
         const menuSection = document.getElementById('explore-menu');
@@ -12,8 +36,19 @@ const Header = () => {
 
     return (
         <div className='header'>
-            {/* Pure CSS background - no more orange images */}
-            {/* Using deep green/black gradient as requested */}
+            {/* Background Slider with 3 images */}
+            <div className='slider-container'>
+                <Slider {...settings}>
+                    {sliderImages.map((image, index) => (
+                        <div key={index} className="slider-item">
+                            <div 
+                                className="slider-image" 
+                                style={{ backgroundImage: `url(${image})` }}
+                            />
+                        </div>
+                    ))}
+                </Slider>
+            </div>
             
             {/* Dark overlay */}
             <div className='header-overlay' />

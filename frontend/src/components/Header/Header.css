@@ -10,8 +10,7 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.15) !important;
     width: 100% !important;
     max-width: 1200px !important;
-    /* Beautiful deep green/black gradient - no more orange! */
-    background: linear-gradient(135deg, #000000, #0a0a0a, #1a1a1a, #2a3400, #4e561f) !important;
+    /* Removed gradient background - using slider images instead */
 }
 
 .slider-container {
@@ -34,10 +33,6 @@
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    /* Much stronger CSS filters to completely eliminate orange */
-    filter: hue-rotate(120deg) saturate(0.3) brightness(0.4) contrast(1.5) grayscale(0.3) !important;
-    /* Alternative: Make it completely black if filters don't work */
-    background-color: #1a1a1a !important;
 }
 
 /* Dark overlay for desktop/tablet */
