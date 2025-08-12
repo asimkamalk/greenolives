@@ -44,7 +44,7 @@ const Home = () => {
         </>
       )}
       <ExploreMenu setCategory={setCategory} category={category} />
-      <FoodDisplay category={category} />
+      <FoodDisplay category={category} excludeDeals />
       {popular.length > 0 && (
         <>
           <h2 style={{ marginTop: 32 }}>Most Popular Items</h2>

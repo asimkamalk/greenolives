@@ -4,7 +4,7 @@ import FoodItem from "../FoodItem/FoodItem";
 import { StoreContext } from "../../Context/StoreContext";
 import FoodDetailsModal from "../FoodItem/FoodDetailsModal";
 
-const FoodDisplay = ({ category, customList }) => {
+const FoodDisplay = ({ category, customList, excludeDeals = false }) => {
   const { food_list } = useContext(StoreContext);
   const [selectedFood, setSelectedFood] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -14,11 +14,20 @@ const FoodDisplay = ({ category, customList }) => {
     setModalOpen(true);
   };
 
-  const displayList =
-    customList ||
-    (category === "All"
+  let displayList;
+  if (customList) {
+    displayList = customList;
+  } else if (category === "All") {
+    // Exclude deals if requested for All Recent Menu
+    displayList = excludeDeals
       ? food_list.filter((item) => !item.isDeal)
-      : food_list.filter((item) => item.category === category && !item.isDeal));
+      : food_list;
+  } else {
+    displayList = food_list.filter(
+      (item) =>
+        item.category === category && (excludeDeals ? !item.isDeal : true)
+    );
+  }
   return (
     <div className="food-display" id="food-display">
       <h2>
