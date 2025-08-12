@@ -99,10 +99,7 @@
     gap: 8px;
     justify-content: center;
 }
-.footer-col ul li:hover {
-    color: #FF4C24;
-    padding-left: 6px;
-}
+
 
 .footer-bottom {
     width: 100%;
@@ -122,9 +119,9 @@
 .footer-bottom-right {
     font-weight: 400;
 }
-.footer-bottom-right b {
+/* .footer-bottom-right b {
     color: #FF4C24;
-}
+} */
 
 @media (max-width: 900px) {
     .footer-links-row {
