@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import "./FoodDisplay.css";
 import FoodItem from "../FoodItem/FoodItem";
+import FoodItemSkeleton from "../FoodItem/FoodItemSkeleton";
 import { StoreContext } from "../../Context/StoreContext";
 import FoodDetailsModal from "../FoodItem/FoodDetailsModal";
 
 const FoodDisplay = ({ category, customList, excludeDeals = false }) => {
-  const { food_list } = useContext(StoreContext);
+  const { food_list, isFoodLoading } = useContext(StoreContext);
   const [selectedFood, setSelectedFood] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -38,17 +39,21 @@ const FoodDisplay = ({ category, customList, excludeDeals = false }) => {
           : `${category} Menu`}
       </h2>
       <div className="food-display-list">
-        {displayList.map((item) => (
-          <FoodItem
-            key={item._id}
-            image={item.image}
-            name={item.name}
-            desc={item.description}
-            price={item.price}
-            id={item._id}
-            onCardClick={() => handleCardClick(item)}
-          />
-        ))}
+        {isFoodLoading
+          ? Array.from({ length: 8 }).map((_, idx) => (
+              <FoodItemSkeleton key={idx} />
+            ))
+          : displayList.map((item) => (
+              <FoodItem
+                key={item._id}
+                image={item.image}
+                name={item.name}
+                desc={item.description}
+                price={item.price}
+                id={item._id}
+                onCardClick={() => handleCardClick(item)}
+              />
+            ))}
       </div>
       {modalOpen && selectedFood && (
         <FoodDetailsModal
