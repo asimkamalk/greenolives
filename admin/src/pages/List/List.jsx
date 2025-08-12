@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import EditFoodModal from './EditFoodModal';
 import { useNavigate } from 'react-router-dom';
 import { FaStar, FaRegStar, FaGem, FaRegGem } from 'react-icons/fa';
+import { MdLocalOffer } from 'react-icons/md';
 
 const List = () => {
 
@@ -82,6 +83,9 @@ const List = () => {
               <img src={item.image.startsWith('http') ? item.image : `${url}/images/${item.image}`} alt="" />
               <p>{item.name}</p>
               <td style={{display: 'flex', gap: 12, alignItems: 'center'}}>
+                <span style={{cursor: 'pointer'}} title="Toggle Deal" onClick={() => handleToggleFlag(item._id, 'isDeal', !item.isDeal)}>
+                  <MdLocalOffer color={item.isDeal ? '#FF4C24' : '#bbb'} size={20} />
+                </span>
                 <span style={{cursor: 'pointer'}} title="Toggle Popular" onClick={() => handleToggleFlag(item._id, 'isPopular', !item.isPopular)}>
                   {item.isPopular ? <FaStar color="#FFD700" size={20} /> : <FaRegStar color="#bbb" size={20} />}
                 </span>

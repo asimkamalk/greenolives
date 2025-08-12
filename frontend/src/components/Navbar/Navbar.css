@@ -41,7 +41,7 @@
 }
 
 .navbar-hamburger:focus {
-    outline: 2px solid #FF4C24;
+    outline: 2px solid #636B2F;
 }
 .navbar-hamburger .bar {
     width: 24px;
@@ -262,6 +262,8 @@
         opacity: 1;
         pointer-events: auto;
     }
+
+   
     .navbar {
         padding: 16px 0;
     }
@@ -285,3 +287,6 @@
       width: 85px; /* smaller on small/mobile devices */
     }
   }
+
+
+

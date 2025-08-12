@@ -112,6 +112,7 @@ const addFood = async (req, res) => {
             price: req.body.price,
             category: req.body.category,
             image: imageUrl,
+            isDeal: req.body.isDeal === 'true' || req.body.isDeal === true
         })
 
         await food.save();
@@ -175,8 +176,11 @@ const removeFood = async (req, res) => {
 // update food
 const updateFood = async (req, res) => {
     try {
-        const { id, name, description, price, category } = req.body;
+        const { id, name, description, price, category, isDeal } = req.body;
         let updateData = { name, description, price, category };
+        if (typeof isDeal !== 'undefined') {
+            updateData.isDeal = (isDeal === 'true' || isDeal === true);
+        }
         
         if (req.file) {
             // Upload new image to Cloudinary
