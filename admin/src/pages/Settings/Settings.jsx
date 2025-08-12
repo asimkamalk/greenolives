@@ -110,7 +110,7 @@ const Settings = () => {
             type="text"
             value={dealsTitle}
             onChange={(e) => setDealsTitle(e.target.value)}
-            placeholder="Independence Deals"
+            placeholder="Enter Deal Title"
             style={{ width: "100%", padding: 8, marginTop: 4 }}
           />
         </div>

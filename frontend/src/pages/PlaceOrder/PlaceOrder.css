@@ -54,14 +54,42 @@
     display: flex;
     align-items: center;
     gap: 10px ;
-    border: 1px solid tomato;
+    border: 1px solid #3c5a2a; /* dark green outline */
     padding: 15px;
-    border-radius: 4px;
+    border-radius: 8px;
     min-width: 300px;
     cursor: pointer;
+    background: rgba(28,40,18,0.6);
 }
+/* remove hover highlight */
 .payment .payment-option:hover{
-    background-color:  #ffe7de;
+    background: rgba(28,40,18,0.6);
+}
+
+/* custom radio styling */
+.order-type input[type="radio"],
+.payment .payment-option input[type="radio"]{
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #3c5a2a; /* dark green */
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+}
+.order-type input[type="radio"]:checked,
+.payment .payment-option input[type="radio"]:checked{
+    background-color: #3c5a2a;
+    box-shadow: inset 0 0 0 4px #0f0f0f;
+}
+.order-type label,
+.payment .payment-option label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 @media (max-width:700px) {

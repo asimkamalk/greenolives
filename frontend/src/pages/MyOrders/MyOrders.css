@@ -29,18 +29,18 @@
     color: #636B2F;
 }
 .my-orders button{
-    border: 1px solid #636B2F;
-    padding: 12px 0px;
-    border-radius: 4px;
-    background-color: #000;
+    border: 1px solid #2e4720;
+    padding: 12px 26px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0c0c0c 0%, #0f1a0f 35%, #142414 70%, #20361b 100%);
     cursor: pointer;
-    color: #636B2F;
-    font-weight: 600;
-    transition: background 0.2s, color 0.2s;
+    color: #e6f2e6;
+    font-weight: 700;
+    box-shadow: 0 6px 16px rgba(20, 36, 20, 0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: transform 0.15s ease;
 }
 .my-orders button:hover{
-    background: #181818;
-    color: #8ca04a;
+    transform: translateY(-1px);
 }
 @media (max-width:900px) {
     .my-orders-order{
