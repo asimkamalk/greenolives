@@ -147,3 +147,19 @@
         text-align: center;
     }
 }
+
+
+.footer-bottom-right a {
+    background: linear-gradient(45deg, #6726C2, #9b59b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+    /* Standard for other browsers */
+    background-clip: text;
+    text-fill-color: transparent;
+  
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer; /* keeps the pointer on hover */
+  }
+  

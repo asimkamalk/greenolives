@@ -35,7 +35,7 @@ const Footer = () => {
               </svg>
             </a>
 
-            {/* Instagram */}
+            {/* Instagram - Fixed with proper link wrapper */}
             <a
               href="https://instagram.com"
               target="_blank"
@@ -46,28 +46,68 @@ const Footer = () => {
                 width="38"
                 height="38"
                 viewBox="0 0 38 38"
-                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <defs>
                   <linearGradient
-                    id="insta-gradient"
+                    id="instagram-gradient"
                     x1="0%"
-                    y1="0%"
+                    y1="100%"
                     x2="100%"
-                    y2="100%"
+                    y2="0%"
                   >
-                    <stop offset="0%" stopColor="#FFC107" />
-                    <stop offset="50%" stopColor="#F44336" />
-                    <stop offset="100%" stopColor="#9C27B0" />
+                    <stop offset="0%" stopColor="#ffdc80" />
+                    <stop offset="22%" stopColor="#fcaf45" />
+                    <stop offset="44%" stopColor="#f77737" />
+                    <stop offset="67%" stopColor="#f56040" />
+                    <stop offset="89%" stopColor="#fd1d1d" />
+                    <stop offset="100%" stopColor="#e1306c" />
                   </linearGradient>
+                  <radialGradient id="instagram-radial" cx="30%" cy="30%">
+                    <stop offset="0%" stopColor="#405de6" />
+                    <stop offset="25%" stopColor="#5851db" />
+                    <stop offset="50%" stopColor="#833ab4" />
+                    <stop offset="75%" stopColor="#c13584" />
+                    <stop offset="100%" stopColor="#fd1d1d" />
+                  </radialGradient>
                 </defs>
-                <circle cx="19" cy="19" r="19" fill="url(#insta-gradient)" />
-                <path
-                  d="M19 13C15.6863 13 13 15.6863 13 19C13 22.3137 15.6863 25 19 25C22.3137 25 25 22.3137 25 19C25 15.6863 22.3137 13 19 13ZM19 23C16.7909 23 15 21.2091 15 19C15 16.7909 16.7909 15 19 15C21.2091 15 23 16.7909 23 19C23 21.2091 21.2091 23 19 23Z"
-                  fill="white"
+
+                {/* Background with Instagram gradient */}
+                <rect
+                  x="3"
+                  y="3"
+                  width="32"
+                  height="32"
+                  rx="7"
+                  ry="7"
+                  fill="url(#instagram-radial)"
                 />
-                <circle cx="25" cy="14" r="1" fill="white" />
+
+                {/* Main camera square outline */}
+                <rect
+                  x="8.5"
+                  y="8.5"
+                  width="21"
+                  height="21"
+                  rx="4.5"
+                  ry="4.5"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="1"
+                />
+
+                {/* Camera lens circle */}
+                <circle
+                  cx="19"
+                  cy="19"
+                  r="6"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="1"
+                />
+
+                {/* Flash/lens indicator dot */}
+                <circle cx="24.5" cy="13.5" r="1.3" fill="white" />
               </svg>
             </a>
 
@@ -96,12 +136,16 @@ const Footer = () => {
 
           <div className="footer-company-name">
             <a
-              href="https://www.linkedin.com/company/targlabs/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TargLabs LinkedIn"
+              href="#home"
+              aria-label="New Green Olives Home"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("home")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
             >
-              TargLabs
+              New Green Olives
             </a>
           </div>
         </div>
