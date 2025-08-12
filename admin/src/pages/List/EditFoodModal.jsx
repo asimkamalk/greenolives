@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import './EditFoodModal.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "./EditFoodModal.css";
 
 const EditFoodModal = ({ food, onClose, onUpdated }) => {
   const [form, setForm] = useState({
@@ -28,23 +28,26 @@ const EditFoodModal = ({ food, onClose, onUpdated }) => {
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.append('id', food._id);
-      formData.append('name', form.name);
-      formData.append('description', form.description);
-      formData.append('price', form.price);
-      formData.append('category', form.category);
-      formData.append('isDeal', form.isDeal);
-      if (image) formData.append('image', image);
-      const response = await axios.post('https://greenolives.onrender.com/api/food/update', formData);
+      formData.append("id", food._id);
+      formData.append("name", form.name);
+      formData.append("description", form.description);
+      formData.append("price", form.price);
+      formData.append("category", form.category);
+      formData.append("isDeal", form.isDeal);
+      if (image) formData.append("image", image);
+      const response = await axios.post(
+        "https://greenolives.onrender.com/api/food/update",
+        formData
+      );
       if (response.data.success) {
-        toast.success('Food updated successfully!');
+        toast.success("Food updated successfully!");
         onUpdated();
         onClose();
       } else {
-        toast.error(response.data.message || 'Update failed');
+        toast.error(response.data.message || "Update failed");
       }
     } catch (err) {
-      toast.error('Update failed');
+      toast.error("Update failed");
     }
     setLoading(false);
   };
@@ -55,13 +58,35 @@ const EditFoodModal = ({ food, onClose, onUpdated }) => {
         <h3>Edit Food Item</h3>
         <form onSubmit={handleSubmit}>
           <label>Name</label>
-          <input name="name" value={form.name} onChange={handleChange} required />
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
           <label>Description</label>
-          <textarea name="description" value={form.description} onChange={handleChange} required />
+          <textarea
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            required
+          />
           <label>Price</label>
-          <input name="price" type="number" value={form.price} onChange={handleChange} required />
+          <input
+            name="price"
+            type="number"
+            value={form.price}
+            onChange={handleChange}
+            required
+          />
           <label>Category</label>
-          <select name="category" value={form.category} onChange={handleChange} required>
+          <select
+            name="category"
+            value={form.category}
+            onChange={handleChange}
+            required
+            disabled={form.isDeal}
+          >
             <option value="Appetizer">Appetizer</option>
             <option value="Kids Special">Kids Special</option>
             <option value="Salad Zone">Salad Zone</option>
@@ -92,15 +117,38 @@ const EditFoodModal = ({ food, onClose, onUpdated }) => {
             <option value="Regular Drinks">Regular Drinks</option>
             <option value="Icecream / Dessert">Icecream / Dessert</option>
           </select>
-          <label style={{display:'flex',alignItems:'center',gap:8,marginTop:8}}>
-            <input type="checkbox" name="isDeal" checked={form.isDeal} onChange={(e)=> setForm(prev=>({...prev, isDeal: e.target.checked}))} />
+          {form.isDeal && (
+            <div style={{ fontSize: 12, color: "#888", marginTop: 4 }}>
+              Category is ignored for deals.
+            </div>
+          )}
+          <label
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              marginTop: 8,
+            }}
+          >
+            <input
+              type="checkbox"
+              name="isDeal"
+              checked={form.isDeal}
+              onChange={(e) =>
+                setForm((prev) => ({ ...prev, isDeal: e.target.checked }))
+              }
+            />
             Mark as Deal
           </label>
           <label>Image (optional)</label>
           <input type="file" accept="image/*" onChange={handleImageChange} />
           <div className="edit-food-modal-actions">
-            <button type="button" onClick={onClose} disabled={loading}>Cancel</button>
-            <button type="submit" disabled={loading}>{loading ? 'Saving...' : 'Save'}</button>
+            <button type="button" onClick={onClose} disabled={loading}>
+              Cancel
+            </button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Saving..." : "Save"}
+            </button>
           </div>
         </form>
       </div>
@@ -108,4 +156,4 @@ const EditFoodModal = ({ food, onClose, onUpdated }) => {
   );
 };
 
-export default EditFoodModal; 
+export default EditFoodModal;

@@ -99,7 +99,11 @@ const Add = () => {
         <div className="add-category-price">
           <div className="add-category flex-col">
             <p>Product category</p>
-            <select name="category" onChange={onChangeHandler}>
+            <select
+              name="category"
+              onChange={onChangeHandler}
+              disabled={data.isDeal}
+            >
               <option value="Appetizer">Appetizer</option>
               <option value="Kids Special">Kids Special</option>
               <option value="Salad Zone">Salad Zone</option>
@@ -130,6 +134,11 @@ const Add = () => {
               <option value="Regular Drinks">Regular Drinks</option>
               <option value="Icecream / Dessert">Icecream / Dessert</option>
             </select>
+            {data.isDeal && (
+              <div style={{ fontSize: 12, color: "#888", marginTop: 4 }}>
+                Category is ignored for deals.
+              </div>
+            )}
           </div>
           <div className="add-price flex-col">
             <p>Product Price</p>
