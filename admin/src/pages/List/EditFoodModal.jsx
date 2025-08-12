@@ -9,6 +9,7 @@ const EditFoodModal = ({ food, onClose, onUpdated }) => {
     description: food.description,
     price: food.price,
     category: food.category,
+    isDeal: !!food.isDeal,
   });
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -32,8 +33,9 @@ const EditFoodModal = ({ food, onClose, onUpdated }) => {
       formData.append('description', form.description);
       formData.append('price', form.price);
       formData.append('category', form.category);
+      formData.append('isDeal', form.isDeal);
       if (image) formData.append('image', image);
-      const response = await axios.post('https://greenolives.onrender.com/4001/api/food/update', formData);
+      const response = await axios.post('https://greenolives.onrender.com/api/food/update', formData);
       if (response.data.success) {
         toast.success('Food updated successfully!');
         onUpdated();
@@ -90,6 +92,10 @@ const EditFoodModal = ({ food, onClose, onUpdated }) => {
             <option value="Regular Drinks">Regular Drinks</option>
             <option value="Icecream / Dessert">Icecream / Dessert</option>
           </select>
+          <label style={{display:'flex',alignItems:'center',gap:8,marginTop:8}}>
+            <input type="checkbox" name="isDeal" checked={form.isDeal} onChange={(e)=> setForm(prev=>({...prev, isDeal: e.target.checked}))} />
+            Mark as Deal
+          </label>
           <label>Image (optional)</label>
           <input type="file" accept="image/*" onChange={handleImageChange} />
           <div className="edit-food-modal-actions">
