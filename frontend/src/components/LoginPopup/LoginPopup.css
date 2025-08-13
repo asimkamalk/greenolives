@@ -53,21 +53,27 @@
 .login-popup-container button{
     border: none;
     padding: 14px;
-    border-radius: 8px;
+    border-radius: 50px;
     color: white;
-    background-color: #FF4C24;
+    background: linear-gradient(90deg, #808000 60%, #a3a354 100%);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 10px;
+    box-shadow: 0 4px 16px rgba(99,107,47,0.4);
 }
 
 .login-popup-container button:hover {
-    background-color: #e6391a;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 76, 36, 0.3);
+    background: linear-gradient(90deg, #a3a354 60%, #808000 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(99,107,47,0.5);
 }
+
+.login-popup-container button:active {
+    transform: translateY(0);
+}
+
 .login-popup-condition{
     display: flex;
     align-items: start;
@@ -78,15 +84,29 @@
 
 .login-popup-condition input{
     margin-top: 5px;
-    accent-color: #FF4C24;
+    accent-color: #636B2F;
     transform: scale(1.2);
 }
 
-
 .login-popup p span{
-    color: #FF4C24;
-    font-weight: 500;
+    color: #636B2F;
+    font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #808000 20%, #a3a354 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-popup p span:hover {
+    background: linear-gradient(90deg, #a3a354 20%, #808000 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateY(-1px);
 }
 
 /* Address fields styles */

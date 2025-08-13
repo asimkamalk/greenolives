@@ -96,6 +96,20 @@
 
 .navbar-search-icon{
     position: relative;
+    background: linear-gradient(90deg, #808000 60%, #a3a354 100%);
+    border-radius: 50%;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar-search-icon:hover {
+    background: linear-gradient(90deg, #a3a354 60%, #808000 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(99,107,47,0.4);
+}
+
+.navbar-search-icon img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 
 .navbar-search-icon .dot{
@@ -110,23 +124,23 @@
 }
 
 .navbar-right button {
-    background: #636B2F;
+    background: linear-gradient(90deg, #808000 60%, #a3a354 100%);
     font-size: 17px;
     color: #000;
-    border: 1px solid #636B2F;
+    border: none;
     padding: 12px 36px;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 2px 12px rgba(99,107,47,0.10);
+    box-shadow: 0 4px 16px rgba(99,107,47,0.4);
     font-weight: 600;
-    transition: background 0.3s, color 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
 }
 
 .navbar-right button:hover, .navbar-right button:focus {
-    background: #8ca04a;
-    color: #000;
-    box-shadow: 0 6px 24px rgba(99,107,47,0.18);
-    outline: 2px solid #636B2F;
+    background: linear-gradient(90deg, #a3a354 60%, #808000 100%);
+    box-shadow: 0 8px 32px rgba(99,107,47,0.5);
+    transform: translateY(-2px);
+    outline: none;
 }
 
 .navbar-profile{
@@ -145,7 +159,8 @@
 .navbar-profile-dropdown{
     position: absolute;
     right: 0;
-    z-index: 1;
+    top: 100%;
+    z-index: 200;
     display: none;
     min-width: 160px;
     margin-top: 8px;
@@ -279,6 +294,25 @@
         background: rgba(0,0,0,0.18);
         z-index: 105;
         animation: fadeIn 0.2s;
+    }
+    
+    /* Fix profile dropdown on mobile */
+    .navbar-profile-dropdown {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        z-index: 300;
+        min-width: 180px;
+        margin-top: 12px;
+    }
+    
+    .navbar-profile-dropdown li {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+    
+    .navbar-profile-dropdown img {
+        width: 24px;
     }
 }
 

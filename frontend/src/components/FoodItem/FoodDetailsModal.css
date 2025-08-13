@@ -33,14 +33,19 @@
 }
 .food-details-close {
   position: absolute;
-  top: 12px;
-  right: 18px;
+  top: 8px;
+  right: 12px;
   background: none;
   border: none;
   color: #636B2F;
   font-size: 2rem;
   cursor: pointer;
-  z-index: 1;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .food-details-image {
   width: 220px;
@@ -49,17 +54,22 @@
   border-radius: 12px;
   margin-bottom: 18px;
   border: 2px solid #636B2F;
+  box-shadow: 0 4px 16px rgba(99,107,47,0.15);
 }
 .food-details-desc {
   margin: 12px 0 18px 0;
   color: #8ca04a;
   text-align: center;
+  line-height: 1.5;
+  max-width: 280px;
 }
 .food-details-bottom {
   display: flex;
   align-items: center;
-  gap: 24px;
-  margin-top: 10px;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 16px;
+  padding: 0 8px;
 }
 .food-details-price {
   font-size: 1.5rem;
@@ -67,37 +77,64 @@
   color: #636B2F;
 }
 .food-details-add-btn {
-  background: #636B2F;
-  color: #000;
+  background: linear-gradient(90deg, #808000 60%, #a3a354 100%);
+  color: white;
   border: none;
-  border-radius: 8px;
-  padding: 10px 22px;
+  border-radius: 50px;
+  padding: 12px 24px;
   font-size: 1rem;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(99,107,47,0.4);
 }
 .food-details-add-btn:hover {
-  background: #8ca04a;
-  color: #000;
+  background: linear-gradient(90deg, #a3a354 60%, #808000 100%);
+  box-shadow: 0 8px 32px rgba(99,107,47,0.5);
+  transform: translateY(-2px);
 }
+.food-details-add-btn:active {
+  transform: translateY(0);
+}
+
 @media (max-width: 600px) {
   .food-details-modal {
     min-width: 98vw;
     max-width: 98vw;
-    padding: 8px 2px 8px 2px;
-    border-radius: 10px;
+    padding: 16px 12px;
+    border-radius: 12px;
+    margin: 16px;
   }
   .food-details-image {
-    width: 100vw;
-    max-width: 100vw;
+    width: 100%;
+    max-width: 280px;
     height: auto;
-    max-height: 220px;
-    object-fit: contain;
-    border-radius: 10px 10px 0 0;
-    margin-bottom: 12px;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  .food-details-desc {
+    margin: 12px 0 16px 0;
+    padding: 0 8px;
+  }
+  .food-details-bottom {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    margin-top: 20px;
+  }
+  .food-details-price {
+    text-align: center;
+    font-size: 1.4rem;
+  }
+  .food-details-add-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 1.1rem;
   }
 } 
