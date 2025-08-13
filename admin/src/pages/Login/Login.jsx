@@ -1,35 +1,46 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import { url } from "../../assets/assets";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-      const response = await fetch('https://greenolives.onrender.com/api/user/login', {
-        method: 'POST',
+      // Allow hardcoded admin login without calling backend
+      if (
+        email === "newgreenolivesofficial@gmail.com" &&
+        password === "admin@go123"
+      ) {
+        localStorage.setItem("adminToken", "local-admin");
+        navigate("/list");
+        return;
+      }
+
+      const response = await fetch(`${url}/api/user/login`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
-      
+
       if (data.success) {
-        localStorage.setItem('adminToken', data.token);
-        navigate('/list');
+        localStorage.setItem("adminToken", data.token);
+        navigate("/list");
       } else {
-        alert(data.message || 'Login failed');
+        alert(data.message || "Login failed");
       }
     } catch (error) {
-      console.error('Login error:', error);
-      alert('Login failed');
+      console.error("Login error:", error);
+      alert("Login failed");
     }
   };
 
@@ -63,4 +74,4 @@ const Login = () => {
   );
 };
 
-export default Login; 
+export default Login;

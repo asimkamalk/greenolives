@@ -16,7 +16,22 @@ const port = process.env.PORT || 4001;
 // middlewares
 app.use(express.json())
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://admin.newgreenolives.com', 'https://newgreenolives.com', ],
+  origin: (origin, callback) => {
+    const allowList = [
+      'http://localhost:5173',
+      'https://admin.newgreenolives.com',
+      'https://newgreenolives.com'
+    ];
+    if (!origin) return callback(null, true);
+    try {
+      const hostname = new URL(origin).hostname;
+      const isVercel = /\.vercel\.app$/.test(hostname);
+      if (allowList.includes(origin) || isVercel) {
+        return callback(null, true);
+      }
+    } catch (e) {}
+    return callback(null, false);
+  },
   credentials: true
 }))
 

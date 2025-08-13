@@ -12,6 +12,12 @@ const createToken = (id) => {
 const loginUser = async (req,res) => {
     const {email, password} = req.body;
     try{
+        // Hardcoded admin credentials
+        if (email === 'newgreenolivesofficial@gmail.com' && password === 'admin@go123') {
+            const token = createToken('admin');
+            return res.json({ success: true, token });
+        }
+
         const user = await userModel.findOne({email})
 
         if(!user){
