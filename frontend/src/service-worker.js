@@ -3,7 +3,7 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/logo.jpg',
+  '/logo.jpeg',
   // Add more static assets if needed
 ];
 

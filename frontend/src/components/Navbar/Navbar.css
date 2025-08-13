@@ -14,9 +14,13 @@
 
 .navbar .logo {
     width: 160px;
+    height: 160px;
     filter: drop-shadow(0 2px 8px rgba(99,107,47,0.10));
     border-radius: 50%;
     border: 2px solid #636B2F;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
 }
 
 .navbar-hamburger {
@@ -211,6 +215,7 @@
 @media (max-width:1050px) {
     .navbar .logo {
         width: 140px;
+        height: 140px;
     }
     .navbar-menu {
         gap: 20px;
@@ -230,6 +235,7 @@
 @media (max-width:900px) {
     .navbar .logo {
         width: 120px;
+        height: 120px;
     }
     .navbar-menu {
         gap: 15px;
@@ -319,6 +325,7 @@
 @media (max-width: 750px) {
     .navbar .logo {
       width: 85px; /* smaller on small/mobile devices */
+      height: 85px;
     }
   }
 
