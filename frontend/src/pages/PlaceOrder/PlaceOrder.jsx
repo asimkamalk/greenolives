@@ -27,6 +27,7 @@ const PlaceOrder = () => {
   const [paymentScreenshot, setPaymentScreenshot] = useState(null);
   const [transactionId, setTransactionId] = useState("");
   const [verifying, setVerifying] = useState(false);
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
   const {
     getTotalCartAmount,
@@ -59,6 +60,8 @@ const PlaceOrder = () => {
 
   const placeOrder = async (e) => {
     e.preventDefault();
+    if (isPlacingOrder) return; // Prevent multiple submissions
+    setIsPlacingOrder(true);
     let orderItems = [];
     food_list.map((item) => {
       if (cartItems[item._id] > 0) {
@@ -73,7 +76,7 @@ const PlaceOrder = () => {
     formData.append(
       "amount",
       getTotalCartAmount() +
-        (orderType === "delivery" ? getConditionalDeliveryCharge() : 0)
+      (orderType === "delivery" ? getConditionalDeliveryCharge() : 0)
     );
     formData.append("userId", userId);
     formData.append("paymentMethod", payment);
@@ -99,6 +102,7 @@ const PlaceOrder = () => {
       }
     } else {
       toast.error("Something Went Wrong");
+      setIsPlacingOrder(false); // Only reset here if it fails, since success navigates away
     }
   };
 
@@ -348,9 +352,9 @@ const PlaceOrder = () => {
                   {getTotalCartAmount() === 0
                     ? 0
                     : getTotalCartAmount() +
-                      (orderType === "delivery"
-                        ? getConditionalDeliveryCharge()
-                        : 0)}
+                    (orderType === "delivery"
+                      ? getConditionalDeliveryCharge()
+                      : 0)}
                 </b>
               </div>
             </div>
@@ -454,9 +458,13 @@ const PlaceOrder = () => {
           <button
             className="place-order-submit"
             type="submit"
-            disabled={!isOpen || verifying}
+            disabled={!isOpen || verifying || isPlacingOrder}
           >
-            {payment === "cod" ? "Place Order" : "Place Order & Upload Payment"}
+            {isPlacingOrder
+              ? "Processing..."
+              : payment === "cod"
+                ? "Place Order"
+                : "Place Order & Upload Payment"}
           </button>
         </div>
       </form>
