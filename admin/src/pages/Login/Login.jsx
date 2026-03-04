@@ -18,7 +18,7 @@ const Login = () => {
         password === "admin@go123"
       ) {
         localStorage.setItem("adminToken", "local-admin");
-        navigate("/list");
+        navigate("/");
         return;
       }
 
@@ -34,7 +34,7 @@ const Login = () => {
 
       if (data.success) {
         localStorage.setItem("adminToken", data.token);
-        navigate("/list");
+        navigate("/");
       } else {
         alert(data.message || "Login failed");
       }

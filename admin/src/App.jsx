@@ -40,7 +40,15 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={token ? <Navigate to="/list" replace /> : <Login />}
+            element={
+              token ? (
+                <ProtectedRoute>
+                  <List />
+                </ProtectedRoute>
+              ) : (
+                <Login />
+              )
+            }
           />
           <Route
             path="/add"
@@ -50,14 +58,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/list"
-            element={
-              <ProtectedRoute>
-                <List />
-              </ProtectedRoute>
-            }
-          />
+
           <Route
             path="/orders"
             element={
