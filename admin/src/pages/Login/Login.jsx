@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { url } from "../../assets/assets";
 
-const Login = () => {
+const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ const Login = () => {
         password === "admin@go123"
       ) {
         localStorage.setItem("adminToken", "local-admin");
+        setToken("local-admin");
         navigate("/");
         return;
       }
@@ -34,6 +35,7 @@ const Login = () => {
 
       if (data.success) {
         localStorage.setItem("adminToken", data.token);
+        setToken(data.token);
         navigate("/");
       } else {
         alert(data.message || "Login failed");

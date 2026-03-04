@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { Route, Routes, Navigate } from "react-router-dom";
@@ -20,12 +20,12 @@ const ProtectedRoute = ({ children }) => {
 };
 
 const App = () => {
-  const token = localStorage.getItem("adminToken");
+  const [token, setToken] = useState(localStorage.getItem("adminToken") || "");
 
   return (
     <div className="app">
       <ToastContainer />
-      {token && <Navbar />}
+      {token && <Navbar setToken={setToken} />}
       {token && <hr />}
       <div
         className="app-content"
@@ -46,7 +46,7 @@ const App = () => {
                   <List />
                 </ProtectedRoute>
               ) : (
-                <Login />
+                <Login setToken={setToken} />
               )
             }
           />
