@@ -193,6 +193,20 @@ const Footer = () => {
                   {emailAddress}
                 </a>
               </li>
+              <li>
+                <span role="img" aria-label="Location">
+                  📍
+                </span>{" "}
+                <a
+                  href="https://share.google/gNYccMolDnvqP6upI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-link"
+                  aria-label="View on Google Maps"
+                >
+                  Hayatabad Phase 2, Near Hayatabad Sports Complex
+                </a>
+              </li>
             </ul>
           </div>
         </div>
