@@ -1,0 +1,4 @@
+﻿DB Connected
+Connected to MongoDB for cleanup...
+Deleted 12 non-admin user(s).
+Remaining user(s) in the database: 1

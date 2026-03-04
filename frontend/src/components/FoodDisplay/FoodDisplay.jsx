@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./FoodDisplay.css";
 import FoodItem from "../FoodItem/FoodItem";
 import FoodItemSkeleton from "../FoodItem/FoodItemSkeleton";
@@ -9,6 +9,12 @@ const FoodDisplay = ({ category, customList, excludeDeals = false }) => {
   const { food_list, isFoodLoading } = useContext(StoreContext);
   const [selectedFood, setSelectedFood] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(20);
+
+  // Reset pagination if category changes
+  useEffect(() => {
+    setVisibleCount(20);
+  }, [category, customList]);
 
   const handleCardClick = (food) => {
     setSelectedFood(food);
@@ -35,26 +41,44 @@ const FoodDisplay = ({ category, customList, excludeDeals = false }) => {
         {category === undefined
           ? null
           : category === "All"
-          ? "All Recent Menu"
-          : `${category} Menu`}
+            ? "All Recent Menu"
+            : `${category} Menu`}
       </h2>
       <div className="food-display-list">
         {isFoodLoading
-          ? Array.from({ length: 8 }).map((_, idx) => (
-              <FoodItemSkeleton key={idx} />
-            ))
-          : displayList.map((item) => (
-              <FoodItem
-                key={item._id}
-                image={item.image}
-                name={item.name}
-                desc={item.description}
-                price={item.price}
-                id={item._id}
-                onCardClick={() => handleCardClick(item)}
-              />
-            ))}
+          ? Array.from({ length: Math.min(8, visibleCount) }).map((_, idx) => (
+            <FoodItemSkeleton key={idx} />
+          ))
+          : displayList.slice(0, visibleCount).map((item) => (
+            <FoodItem
+              key={item._id}
+              image={item.image}
+              name={item.name}
+              desc={item.description}
+              price={item.price}
+              id={item._id}
+              onCardClick={() => handleCardClick(item)}
+            />
+          ))}
       </div>
+      {visibleCount < displayList.length && (
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+          <button
+            onClick={() => setVisibleCount(prev => prev + 20)}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: 'tomato',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontFamily: 'Outfit'
+            }}>
+            Load More
+          </button>
+        </div>
+      )}
       {modalOpen && selectedFood && (
         <FoodDetailsModal
           food={selectedFood}
